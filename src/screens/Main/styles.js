@@ -29,6 +29,7 @@ export const AddressText = styled.Text`
   font-size: 15px;
   color: #737373;
   margin-bottom: 10px;
+  width: 80%;
 `
 
 export const MilesText = styled.Text`
