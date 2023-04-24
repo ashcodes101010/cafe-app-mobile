@@ -3,12 +3,57 @@ import styled from 'styled-components'
 
 export const StyledScrollView = styled.ScrollView`
   flex-grow: 1;
-  background-color: white;
-  padding: 10px;
+  background-color: transparent;
   margin-bottom: 65px;
   margin-top: 120px;
   border-radius: 10px;
+  width: 100%;
 `
+
+export const CafeContainer = styled.View`
+  min-height: 130px;
+  width: 100%;
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 2px;
+`
+
+export const CafeName = styled.Text`
+  font-weight: 500;
+  font-size: 18px;
+  color: #252B42;
+`
+
+export const AddressText = styled.Text`
+  font-weight: 500;
+  font-size: 15px;
+  color: #737373;
+  margin-bottom: 10px;
+`
+
+export const MilesText = styled.Text`
+  font-weight: 700;
+  font-size: 12px;
+  color: white;
+`
+
+export const MilesContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 35px;
+  background: #67C757;
+  border-radius: 2.5px;
+`
+
+export const hitSlop = {
+  top: 30,
+  bottom: 30,
+  left: 30,
+  right: 30,
+}
 
 export const styles = StyleSheet.create({
   loading: {

@@ -5,6 +5,7 @@ export const GET_CAFES = gql`
     getLocations {
       id
       fullName
+      shortAddress
       description
       longitude
       latitude
