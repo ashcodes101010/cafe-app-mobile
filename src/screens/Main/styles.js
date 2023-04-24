@@ -16,6 +16,12 @@ export const CafeContainer = styled.View`
   background-color: white;
   padding: 20px;
   margin-bottom: 2px;
+  flex-direction: row;
+`
+
+export const CafeContainerRight = styled.View`
+  margin-left: 25px;
+  width: 50%;
 `
 
 export const CafeName = styled.Text`
@@ -29,7 +35,6 @@ export const AddressText = styled.Text`
   font-size: 15px;
   color: #737373;
   margin-bottom: 10px;
-  width: 80%;
 `
 
 export const MilesText = styled.Text`

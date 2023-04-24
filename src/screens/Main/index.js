@@ -1,7 +1,8 @@
 import { useQuery } from '@apollo/client'
 import React, { useContext, useState } from 'react'
-import { TouchableOpacity, View } from 'react-native'
+import { Image, TouchableOpacity, View } from 'react-native'
 import { ActivityIndicator } from 'react-native-paper'
+import { CAFE_IMAGES } from '../../../assets/cafeImages/constants'
 import MapIcon from '../../../assets/icons/MapIcon'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
@@ -13,7 +14,9 @@ import { INIT_POS } from './components/Map/constants'
 import { GET_CAFES } from './graphql'
 import {
   AddressText,
-  CafeContainer, CafeName, hitSlop, MilesContainer, MilesText, StyledScrollView, styles,
+  CafeContainer, CafeContainerRight, CafeName,
+  hitSlop, MilesContainer, MilesText, StyledScrollView,
+  styles,
 } from './styles'
 
 const Main = ({ navigation }) => {
@@ -47,16 +50,24 @@ const Main = ({ navigation }) => {
         ) : (
           <StyledScrollView>
             {sortedLocations.map(l => (
-              <CafeContainer>
-                <CafeName>{l.fullName}</CafeName>
-                <AddressText>{l.shortAddress}</AddressText>
-                {!!location && (
-                <MilesContainer>
-                  <MilesText>
-                    {`${distanceMiles(location.longitude, location.latitude, l.longitude, l.latitude)} mi`}
-                  </MilesText>
-                </MilesContainer>
-                )}
+              <CafeContainer key={l.fullName}>
+                <Image
+                  style={{ width: 160, height: 120, borderRadius: 4 }}
+                  source={CAFE_IMAGES[l.image][0]}
+                  resizeMode="cover"
+                  resizeMethod="resize"
+                />
+                <CafeContainerRight>
+                  <CafeName>{l.fullName}</CafeName>
+                  <AddressText>{l.shortAddress}</AddressText>
+                  {!!location && (
+                  <MilesContainer>
+                    <MilesText>
+                      {`${distanceMiles(location.longitude, location.latitude, l.longitude, l.latitude)} mi`}
+                    </MilesText>
+                  </MilesContainer>
+                  )}
+                </CafeContainerRight>
               </CafeContainer>
             ))}
           </StyledScrollView>
