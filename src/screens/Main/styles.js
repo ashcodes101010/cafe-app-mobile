@@ -57,6 +57,6 @@ export const hitSlop = {
 
 export const styles = StyleSheet.create({
   loading: {
-    marginTop: 50,
+    marginTop: 150,
   },
 })

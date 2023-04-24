@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import React, { useContext, useState } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import { ActivityIndicator } from 'react-native-paper'
 import MapIcon from '../../../assets/icons/MapIcon'
 import Footer from '../../components/Footer'
@@ -31,9 +31,6 @@ const Main = ({ navigation }) => {
   return (
     <>
       <View>
-        <Text>
-          Food
-        </Text>
         {loading && (
         <ActivityIndicator
           style={styles.loading}
