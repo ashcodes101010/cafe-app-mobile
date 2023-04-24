@@ -2,7 +2,7 @@
 
 const theme = {
   colors: {
-    harvardCrimson: '#A51C30',
+    harvardCrimson: '#990000',
   },
   fonts: {},
 }
