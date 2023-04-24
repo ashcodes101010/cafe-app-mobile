@@ -12,7 +12,7 @@ const Map = ({ initialRegion, locations }) => {
       initialRegion={initialRegion}
       style={{ height: '100%', width: '100%' }}
       showsUserLocation
-      mapType="mutedStandard"
+      mapType="standard"
       rotateEnabled={false}
       pitchEnabled={false}
       minZoomLevel={12}
