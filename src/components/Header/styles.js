@@ -7,13 +7,14 @@ export const Container = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
   height: 120px;
   border-color: transparent;
   padding-top: 55px;
   padding-left: 23px;
   padding-right: 23px;
+  padding-bottom: 10px;
   z-index: 10;
   background-color: ${theme.colors.harvardCrimson};
   shadow-color: black;
@@ -23,11 +24,12 @@ export const Container = styled.View`
 
 export const Title = styled.Text`
   font-weight: 600;
-  font-size: 32px;
+  font-size: ${props => (props.length > 16 ? (16 / props.length) * 32 : 32)}px;
   text-align: left;
   color: #FFFFFF;
   text-decoration: ${props => (props.highlight ? 'underline' : 'none')};
   text-decoration-color: white;
+  max-width: 70%;
 `
 
 export const hitSlop = {
