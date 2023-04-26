@@ -3,9 +3,13 @@ import React, { useEffect, useState } from 'react'
 import * as Location from 'expo-location'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useQuery } from '@apollo/client'
+import * as SplashScreen from 'expo-splash-screen'
 import { VIEWER } from './viewer'
 
 export const Context = React.createContext()
+
+// Keep splash screen visible while fetch viewer
+SplashScreen.preventAutoHideAsync()
 
 export const ContextProvider = ({ children }) => {
   const [location, setLocation] = useState(null)
@@ -15,15 +19,15 @@ export const ContextProvider = ({ children }) => {
 
   const { data, loading, refetch } = useQuery(VIEWER, {
     notifyOnNetworkStatusChange: true,
-    onCompleted: () => {
-      if (initial) {
-      // TODO: hide splash screen here so there's no flicker
-        setInitial(false)
-      }
+    onCompleted: async () => {
       if (data.viewer) {
         setIsSignedIn(true)
       } else {
         setIsSignedIn(false)
+      }
+      if (initial) {
+        setInitial(false)
+        await new Promise(() => setTimeout(async () => SplashScreen.hideAsync(), 1000))
       }
     },
   })
