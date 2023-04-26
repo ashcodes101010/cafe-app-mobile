@@ -1,7 +1,3 @@
-export const PLACEHOLDER_DATA = {
-  boardPlusBalance: 55,
-}
-
 export const MAX_BALANCE = (new Date()).getMonth() < 7 ? 130 : 65
 
 export const EXP_DATE = 'May 13, 2023'
