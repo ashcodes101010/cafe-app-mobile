@@ -54,6 +54,25 @@ export const MilesContainer = styled.View`
   border-radius: 2.5px;
 `
 
+export const MoreInfoButton = styled.TouchableOpacity`
+  background-color: #23A6F0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 35px;
+  border-radius: 2.5px;
+  margin-left: 10px;
+`
+
+export const Buttons = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+`
+
 export const hitSlop = {
   top: 30,
   bottom: 30,

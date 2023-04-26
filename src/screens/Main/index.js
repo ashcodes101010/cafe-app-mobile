@@ -14,8 +14,9 @@ import { INIT_POS } from './components/Map/constants'
 import { GET_CAFES } from './graphql'
 import {
   AddressText,
+  Buttons,
   CafeContainer, CafeContainerRight, CafeName,
-  hitSlop, MilesContainer, MilesText, StyledScrollView,
+  hitSlop, MilesContainer, MilesText, MoreInfoButton, StyledScrollView,
   styles,
 } from './styles'
 
@@ -60,13 +61,20 @@ const Main = ({ navigation }) => {
                 <CafeContainerRight>
                   <CafeName>{l.fullName}</CafeName>
                   <AddressText>{l.shortAddress}</AddressText>
-                  {!!location && (
-                  <MilesContainer>
-                    <MilesText>
-                      {`${distanceMiles(location.longitude, location.latitude, l.longitude, l.latitude)} mi`}
-                    </MilesText>
-                  </MilesContainer>
-                  )}
+                  <Buttons>
+                    {!!location && (
+                    <MilesContainer>
+                      <MilesText>
+                        {`${distanceMiles(location.longitude, location.latitude, l.longitude, l.latitude)} mi`}
+                      </MilesText>
+                    </MilesContainer>
+                    )}
+                    <MoreInfoButton onPress={() => navigation.navigate('Cafe', { id: l.id, title: l.fullName })}>
+                      <MilesText>
+                        More info
+                      </MilesText>
+                    </MoreInfoButton>
+                  </Buttons>
                 </CafeContainerRight>
               </CafeContainer>
             ))}

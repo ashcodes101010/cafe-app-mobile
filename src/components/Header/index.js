@@ -3,7 +3,7 @@ import { Container, Title } from './styles'
 
 const Header = ({ title = '', Icons = () => <></> }) => (
   <Container style={{ shadowOffset: { width: 10, height: 0 } }}>
-    <Title>{title}</Title>
+    <Title length={title.length}>{title}</Title>
     <Icons />
   </Container>
 )
