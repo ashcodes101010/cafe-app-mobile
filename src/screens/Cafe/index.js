@@ -24,7 +24,11 @@ import {
   RatingContainer,
   RatingText,
   TextAndIcon,
+  ReviewText,
+  ReviewsContainerTop,
+  StyledScrollView
 } from './styles'
+import { ScrollView } from 'react-native-gesture-handler'
 
 const { width } = Dimensions.get('window')
 
@@ -83,23 +87,29 @@ const Cafe = ({ navigation, route }) => {
                 )}
               />
             )}
-            <Body>
-              <TextAndIcon>
-                <MarkerIcon style={{ width: 35 }} />
-                <IconText>{cafe.shortAddress}</IconText>
-              </TextAndIcon>
-              <TextAndIcon>
-                <ClockIcon scalar={0.8} style={{ width: 35, alignItems: 'center' }} />
-                <IconText>{formatCafeHours(cafe.hours)}</IconText>
-                {isLocationOpen(cafe.hours) && <OpenText>Open Now!</OpenText>}
-              </TextAndIcon>
-              <DescText>{cafe.description}</DescText>
-              <RatingContainer>
-                <StaticRatingStars rating={cafe.ratingInfo.avgRating} />
-                <RatingText>{`(${cafe.ratingInfo.numReviews})`}</RatingText>
+            <StyledScrollView>
+              <Body>
+                <TextAndIcon>
+                  <MarkerIcon style={{ width: 35 }} />
+                  <IconText>{cafe.shortAddress}</IconText>
+                </TextAndIcon>
+                <TextAndIcon>
+                  <ClockIcon scalar={0.8} style={{ width: 35, alignItems: 'center' }} />
+                  <IconText>{formatCafeHours(cafe.hours)}</IconText>
+                  {isLocationOpen(cafe.hours) && <OpenText>Open Now!</OpenText>}
+                </TextAndIcon>
+                <DescText>{cafe.description}</DescText>
+                <ReviewsContainerTop>
+                < ReviewText>Reviews</ReviewText>
+                  <RatingContainer>
+                    <StaticRatingStars rating={cafe.ratingInfo.avgRating} />
+                    <RatingText>{`(${cafe.ratingInfo.numReviews})`}</RatingText>
+                  </RatingContainer>
+                </ReviewsContainerTop>
                 <Review/>
-              </RatingContainer>
-            </Body>
+                <Review/>
+              </Body>
+            </StyledScrollView>
           </>
         ) : <></>}
       </MainView>

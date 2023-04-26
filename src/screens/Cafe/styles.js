@@ -46,7 +46,7 @@ export const RatingContainer = styled.View`
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  margin-top: 10px;
+  margin-top: 20px;
 `
 
 export const TextAndIcon = styled.View`
@@ -55,6 +55,25 @@ export const TextAndIcon = styled.View`
   justify-content: flex-start;
   margin-bottom: 7px;
   max-width: 90%;
+`
+
+export const ReviewText = styled.Text`
+  font-weight: 600;
+  font-size: 32px;
+  text-align: left;
+  color: black;
+  margin-top: 10px;
+`
+
+export const ReviewsContainerTop = styled.View`
+  flex-direction: row;
+  justifyContent: space-between;
+  margin-bottom: 10px;
+`
+
+export const StyledScrollView = styled.ScrollView`
+  height: 61%;
+  flexGrow: 0;
 `
 
 export const hitSlop = {
