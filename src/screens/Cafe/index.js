@@ -9,6 +9,7 @@ import { CAFE_IMAGES } from '../../../assets/cafeImages/constants'
 import ClockIcon from '../../../assets/icons/ClockIcon'
 import MapIcon from '../../../assets/icons/MapIcon'
 import MarkerIcon from '../../../assets/icons/MarkerIcon'
+import Review from './components/Review'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import { formatCafeHours } from '../../utils/helper'
@@ -93,6 +94,7 @@ const Cafe = ({ navigation, route }) => {
                 <IconText>{formatCafeHours(cafe.hours)}</IconText>
               </TextAndIcon>
               <DescText>{cafe.description}</DescText>
+              <Review/>
             </Body>
           </>
         ) : <></>}
