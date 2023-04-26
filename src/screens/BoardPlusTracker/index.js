@@ -6,8 +6,9 @@ import {
   EXP_DATE, MAX_BALANCE, PLACEHOLDER_DATA, TRACKER_HEIGHT,
 } from './constants'
 import {
-  BalanceText, Line, MainView, TrackerInner, TrackerOuter, TrackerText,
+  BalanceText, Line, MainView, TrackerInner, TrackerOuter, TrackerText, HistoryText
 } from './styles'
+import PurchaseHistory from './components/PurchaseHistory'
 
 const BoardPlusTracker = ({ navigation }) => (
   <>
@@ -27,6 +28,8 @@ const BoardPlusTracker = ({ navigation }) => (
           </Line>
         </TrackerInner>
       </TrackerOuter>
+      <HistoryText>History</HistoryText>
+      <PurchaseHistory/>
     </MainView>
     <Footer navigation={navigation} current="BoardPlusTracker" />
     <Header

@@ -58,3 +58,10 @@ export const TrackerText = styled.Text`
   color: black;
   width: 65px;
 `
+export const HistoryText = styled.Text`
+  font-weight: 600;
+  font-size: 32px;
+  text-align: left;
+  color: black;
+  margin-top: 10px;
+`
