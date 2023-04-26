@@ -1,5 +1,4 @@
-import { useQuery } from '@apollo/client'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {
   Dimensions, Image, TouchableOpacity,
 } from 'react-native'
@@ -12,28 +11,28 @@ import MarkerIcon from '../../../assets/icons/MarkerIcon'
 import Review from './components/Review'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
-import { formatCafeHours } from '../../utils/helper'
-import { GET_CAFE } from './graphql'
+import StaticRatingStars from '../../components/StaticRatingStars'
+import { Context } from '../../context'
+import { formatCafeHours, isLocationOpen } from '../../utils/helper'
 import {
   Body,
   DescText,
   hitSlop,
   IconText,
   MainView,
+  OpenText,
+  RatingContainer,
+  RatingText,
   TextAndIcon,
 } from './styles'
 
 const { width } = Dimensions.get('window')
 
 const Cafe = ({ navigation, route }) => {
-  const { id, title } = route.params
+  const { id } = route.params
+  const { locations } = useContext(Context)
   const [showMap, toggleMap] = useState(false)
-  const { data } = useQuery(GET_CAFE, {
-    fetchPolicy: 'cache-and-network',
-    variables: { id },
-  })
-
-  const { getLocation: cafe } = data || {}
+  const cafe = locations.find(c => c.id === id)
 
   return (
     <>
@@ -92,16 +91,21 @@ const Cafe = ({ navigation, route }) => {
               <TextAndIcon>
                 <ClockIcon scalar={0.8} style={{ width: 35, alignItems: 'center' }} />
                 <IconText>{formatCafeHours(cafe.hours)}</IconText>
+                {isLocationOpen(cafe.hours) && <OpenText>Open Now!</OpenText>}
               </TextAndIcon>
               <DescText>{cafe.description}</DescText>
-              <Review/>
+              <RatingContainer>
+                <StaticRatingStars rating={cafe.ratingInfo.avgRating} />
+                <RatingText>{`(${cafe.ratingInfo.numReviews})`}</RatingText>
+                <Review/>
+              </RatingContainer>
             </Body>
           </>
         ) : <></>}
       </MainView>
       <Footer navigation={navigation} current="Main" />
       <Header
-        title={title}
+        title={cafe.fullName}
         Icons={() => (
           <TouchableOpacity onPress={() => toggleMap(!showMap)} hitSlop={hitSlop}>
             <MapIcon />

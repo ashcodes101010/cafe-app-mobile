@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import theme from '../../theme'
 
 export const MainView = styled.View`
   flex: 1;
@@ -22,6 +23,30 @@ export const IconText = styled.Text`
   color: black;
   font-weight: 500;
   margin-left: 6px;
+`
+
+export const OpenText = styled.Text`
+  font-size: 12px;
+  color: ${theme.colors.openGreen};
+  font-weight: 500;
+  margin-left: 6px;
+  margin-top: 3px;
+`
+
+export const RatingText = styled.Text`
+  font-weight: 500;
+  font-size: 14px;
+  color: #737373;
+  margin-left: 5px;
+  margin-top: 2px;
+`
+
+export const RatingContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 10px;
 `
 
 export const TextAndIcon = styled.View`

@@ -10,6 +10,23 @@ export const GET_CAFES = gql`
       longitude
       latitude
       image
+      ratingInfo
+      hours {
+        id
+        openHour
+        openMin
+        closeHour
+        closeMin
+        monday
+        tuesday
+        wednesday
+        thursday
+        friday
+        saturday
+        sunday
+        extraInfo
+        hoursUncertain
+      }
     }
   }
 `

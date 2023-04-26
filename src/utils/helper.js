@@ -19,22 +19,14 @@ export const distanceMiles = (lon1, lat1, lon2, lat2) => {
   return d < 1 ? d.toFixed(2) : d.toFixed(1)
 }
 
-// Comparison function for sorting locations by distance to geolocation
-export const compareLocations = (a, b, location) => {
-  const { latitude: lat1, longitude: lon1 } = a
-  const { latitude: lat2, longitude: lon2 } = b
-  const { longitude: lon, latitude: lat } = location
-  return distanceMiles(lon1, lat1, lon, lat) - distanceMiles(lon2, lat2, lon, lat)
-}
-
 const daysOfWeek = [
+  'sunday',
   'monday',
   'tuesday',
   'wednesday',
   'thursday',
   'friday',
   'saturday',
-  'sunday',
 ]
 
 const daysOfWeekAbbr = {
@@ -96,4 +88,65 @@ export const formatCafeHours = hours => {
     }
   })
   return str
+}
+
+export const isLocationOpen = hours => {
+  let open = false
+  if (!hours.length) {
+    return open
+  }
+  hours.forEach(h => {
+    if (h.hoursUncertain) {
+      open = false
+    } else {
+      const d = new Date()
+      const day = daysOfWeek[d.getDay()]
+      const currHr = d.getHours()
+      const currMin = d.getMinutes()
+      const notMidnightSpan = h.openHour <= h.closeHour
+      if (notMidnightSpan) {
+        if (h[day]) {
+          if (h.openHour < currHr || (h.openHour === currHr && h.openMin <= currMin)) {
+            if (currHr < h.closeHour || (currHr === h.closeHour && currMin < h.closeMin)) {
+              open = true
+            }
+          }
+        }
+      } else if (currHr < 4) {
+        if (h[daysOfWeek[d.getDay()]]) {
+          if (currHr < h.closeHour || (h.closeHour === currHr && currMin < h.closeMin)) {
+            open = true
+          }
+        }
+      } else if (h[day]) {
+        if (h.openHour < currHr || (h.openHour === currHr && h.openMin <= currMin)) {
+          open = true
+        }
+      }
+    }
+  })
+  return open
+}
+
+// Comparison function for sorting locations by whether open/closed
+export const compareHours = (a, b) => {
+  const aOpen = isLocationOpen(a.hours)
+  const bOpen = isLocationOpen(b.hours)
+  return (bOpen ? 1 : 0) - (aOpen ? 1 : 0)
+}
+
+// Comparison function for sorting locations by distance to geolocation
+export const compareLocations = (a, b, location) => {
+  const { latitude: lat1, longitude: lon1 } = a
+  const { latitude: lat2, longitude: lon2 } = b
+  const { longitude: lon, latitude: lat } = location
+  return distanceMiles(lon1, lat1, lon, lat) - distanceMiles(lon2, lat2, lon, lat)
+}
+
+export const compareHoursLocations = (a, b, location) => {
+  const res = compareHours(a, b)
+  if (res) {
+    return res
+  }
+  return compareLocations(a, b, location)
 }
