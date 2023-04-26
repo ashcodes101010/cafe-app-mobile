@@ -11,6 +11,7 @@ export const ContextProvider = ({ children }) => {
   const [location, setLocation] = useState(null)
   const [isSignedIn, setIsSignedIn] = useState(undefined)
   const [initial, setInitial] = useState(true)
+  const [locations, setLocations] = useState([])
 
   const { data, loading, refetch } = useQuery(VIEWER, {
     notifyOnNetworkStatusChange: true,
@@ -47,8 +48,8 @@ export const ContextProvider = ({ children }) => {
       }
 
       await Location.watchPositionAsync({
-        accuracy: Location.Accuracy.High,
-        distanceInterval: 2,
+        accuracy: Location.Accuracy.Balanced,
+        distanceInterval: 50,
         timeInterval: 15000,
       }, l => setLocation(l.coords))
     }
@@ -59,7 +60,9 @@ export const ContextProvider = ({ children }) => {
     <Context.Provider value={{
       isSignedIn,
       location,
+      locations,
       logOut,
+      setLocations,
       viewer,
     }}
     >

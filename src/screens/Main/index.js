@@ -11,7 +11,9 @@ import Header from '../../components/Header'
 import StaticRatingStars from '../../components/StaticRatingStars'
 import { Context } from '../../context'
 import theme from '../../theme'
-import { compareLocations, distanceMiles } from '../../utils/helper'
+import {
+  compareHours, compareHoursLocations, distanceMiles, isLocationOpen,
+} from '../../utils/helper'
 import Map from './components/Map'
 import { INIT_POS } from './components/Map/constants'
 import { GET_CAFES } from './graphql'
@@ -24,21 +26,22 @@ import {
 } from './styles'
 
 const Main = ({ navigation }) => {
-  const { location } = useContext(Context)
+  const { location, locations, setLocations } = useContext(Context)
   const [showMap, toggleMap] = useState(false)
-  const [locations, setLocations] = useState([])
-  const { data, loading } = useQuery(GET_CAFES, {
+  const { data } = useQuery(GET_CAFES, {
+    fetchPolicy: 'cache-and-network',
     onCompleted: () => setLocations(data.getLocations),
   })
 
   const sortedLocations = location
-    ? [...locations].sort((a, b) => compareLocations(a, b, location))
-    : locations
+    ? [...locations]
+      .sort((a, b) => compareHoursLocations(a, b, location))
+    : [...locations].sort((a, b) => compareHours(a, b))
 
   return (
     <>
       <View>
-        {loading && (
+        {!data && (
         <ActivityIndicator
           style={styles.loading}
           animating
@@ -53,41 +56,52 @@ const Main = ({ navigation }) => {
           />
         ) : (
           <StyledScrollView>
-            {sortedLocations.map(l => (
-              <CafeContainer key={l.fullName}>
-                <Image
-                  style={{ width: 160, height: 120, borderRadius: 4 }}
-                  source={CAFE_IMAGES[l.image][0]}
-                  resizeMode="cover"
-                  resizeMethod="resize"
-                />
-                <CafeContainerRight>
-                  <CafeName>{l.fullName}</CafeName>
-                  <AddressText>{l.shortAddress}</AddressText>
-                  <RatingContainer>
-                    <StaticRatingStars
-                      rating={l.ratingInfo.avgRating}
-                      style={{ marginBottom: 10 }}
-                    />
-                    <RatingText>{`(${l.ratingInfo.numReviews})`}</RatingText>
-                  </RatingContainer>
-                  <Buttons>
-                    {!!location && (
-                    <MilesContainer>
-                      <MilesText>
-                        {`${distanceMiles(location.longitude, location.latitude, l.longitude, l.latitude)} mi`}
-                      </MilesText>
-                    </MilesContainer>
-                    )}
-                    <MoreInfoButton onPress={() => navigation.navigate('Cafe', { id: l.id, title: l.fullName })}>
-                      <MilesText>
-                        More info
-                      </MilesText>
-                    </MoreInfoButton>
-                  </Buttons>
-                </CafeContainerRight>
-              </CafeContainer>
-            ))}
+            {sortedLocations.map(l => {
+              const isOpen = isLocationOpen(l.hours)
+              return (
+                <CafeContainer key={l.fullName}>
+                  <Image
+                    style={{ width: 160, height: 120, borderRadius: 4 }}
+                    source={CAFE_IMAGES[l.image][0]}
+                    resizeMode="cover"
+                    resizeMethod="resize"
+                  />
+                  <CafeContainerRight>
+                    <CafeName>{l.fullName}</CafeName>
+                    <AddressText>{l.shortAddress}</AddressText>
+                    {isOpen && <AddressText>Open Now!</AddressText>}
+                    <RatingContainer>
+                      <StaticRatingStars
+                        rating={l.ratingInfo.avgRating}
+                        style={{ marginBottom: 10 }}
+                      />
+                      <RatingText>{`(${l.ratingInfo.numReviews})`}</RatingText>
+                    </RatingContainer>
+                    <Buttons>
+                      {!!location && isOpen && (
+                      <MilesContainer>
+                        <MilesText>
+                          {`${distanceMiles(location.longitude, location.latitude, l.longitude, l.latitude)} mi`}
+                        </MilesText>
+                      </MilesContainer>
+                      )}
+                      {!isOpen && (
+                      <MilesContainer closed>
+                        <MilesText>
+                          Closed
+                        </MilesText>
+                      </MilesContainer>
+                      )}
+                      <MoreInfoButton onPress={() => navigation.navigate('Cafe', { id: l.id })}>
+                        <MilesText>
+                          More info
+                        </MilesText>
+                      </MoreInfoButton>
+                    </Buttons>
+                  </CafeContainerRight>
+                </CafeContainer>
+              )
+            })}
           </StyledScrollView>
         )}
       </View>

@@ -11,6 +11,22 @@ export const GET_CAFES = gql`
       latitude
       image
       ratingInfo
+      hours {
+        id
+        openHour
+        openMin
+        closeHour
+        closeMin
+        monday
+        tuesday
+        wednesday
+        thursday
+        friday
+        saturday
+        sunday
+        extraInfo
+        hoursUncertain
+      }
     }
   }
 `

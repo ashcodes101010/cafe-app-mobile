@@ -58,7 +58,7 @@ export const MilesContainer = styled.View`
   justify-content: center;
   width: 70px;
   height: 35px;
-  background: #67C757;
+  background: ${props => (props.closed ? 'gray' : '#67C757')};
   border-radius: 2.5px;
 `
 
