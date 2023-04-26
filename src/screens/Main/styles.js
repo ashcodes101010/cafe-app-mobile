@@ -37,6 +37,14 @@ export const AddressText = styled.Text`
   margin-bottom: 10px;
 `
 
+export const RatingText = styled.Text`
+  font-weight: 500;
+  font-size: 14px;
+  color: #737373;
+  margin-left: 5px;
+  margin-top: 2px;
+`
+
 export const MilesText = styled.Text`
   font-weight: 700;
   font-size: 12px;
@@ -70,6 +78,13 @@ export const Buttons = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: flex-start;
+`
+
+export const RatingContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
   justify-content: flex-start;
 `
 

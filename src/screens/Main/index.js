@@ -1,11 +1,14 @@
 import { useQuery } from '@apollo/client'
 import React, { useContext, useState } from 'react'
-import { Image, TouchableOpacity, View } from 'react-native'
+import {
+  Image, TouchableOpacity, View,
+} from 'react-native'
 import { ActivityIndicator } from 'react-native-paper'
 import { CAFE_IMAGES } from '../../../assets/cafeImages/constants'
 import MapIcon from '../../../assets/icons/MapIcon'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
+import StaticRatingStars from '../../components/StaticRatingStars'
 import { Context } from '../../context'
 import theme from '../../theme'
 import { compareLocations, distanceMiles } from '../../utils/helper'
@@ -16,7 +19,7 @@ import {
   AddressText,
   Buttons,
   CafeContainer, CafeContainerRight, CafeName,
-  hitSlop, MilesContainer, MilesText, MoreInfoButton, StyledScrollView,
+  hitSlop, MilesContainer, MilesText, MoreInfoButton, RatingContainer, RatingText, StyledScrollView,
   styles,
 } from './styles'
 
@@ -61,6 +64,13 @@ const Main = ({ navigation }) => {
                 <CafeContainerRight>
                   <CafeName>{l.fullName}</CafeName>
                   <AddressText>{l.shortAddress}</AddressText>
+                  <RatingContainer>
+                    <StaticRatingStars
+                      rating={l.ratingInfo.avgRating}
+                      style={{ marginBottom: 10 }}
+                    />
+                    <RatingText>{`(${l.ratingInfo.numReviews})`}</RatingText>
+                  </RatingContainer>
                   <Buttons>
                     {!!location && (
                     <MilesContainer>

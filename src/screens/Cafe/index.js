@@ -11,6 +11,7 @@ import MapIcon from '../../../assets/icons/MapIcon'
 import MarkerIcon from '../../../assets/icons/MarkerIcon'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
+import StaticRatingStars from '../../components/StaticRatingStars'
 import { formatCafeHours } from '../../utils/helper'
 import { GET_CAFE } from './graphql'
 import {
@@ -93,6 +94,10 @@ const Cafe = ({ navigation, route }) => {
                 <IconText>{formatCafeHours(cafe.hours)}</IconText>
               </TextAndIcon>
               <DescText>{cafe.description}</DescText>
+              <StaticRatingStars
+                rating={cafe.ratingInfo.avgRating}
+                style={{ marginTop: 10 }}
+              />
             </Body>
           </>
         ) : <></>}

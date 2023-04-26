@@ -10,6 +10,7 @@ export const GET_CAFE = gql`
       longitude
       latitude
       image
+      ratingInfo
       hours {
         id
         openHour

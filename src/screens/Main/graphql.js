@@ -10,6 +10,7 @@ export const GET_CAFES = gql`
       longitude
       latitude
       image
+      ratingInfo
     }
   }
 `
