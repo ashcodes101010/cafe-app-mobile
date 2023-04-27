@@ -4,8 +4,8 @@ export const ReviewContainer = styled.View`
   min-height: 80px;
   width: 100%;
   background-color: white;
-  borderBottomWidth: 1px;
-  borderBottomColor: #DEDEDE;
+  border-bottom-width: 1px;
+  border-bottom-color: #DEDEDE;
   padding-bottom: 8px;
   margin-bottom: 8px;
   gap: 5px;
@@ -14,11 +14,18 @@ export const ReviewContainer = styled.View`
 
 export const ReviewTop = styled.View`
   flex-direction: row;
-  justifyContent: space-between;
+  justify-content: space-between;
 `
 
 export const ReviewerNameText = styled.Text`
   font-weight: 500;
   font-size: 20px;
   color: black;
+`
+
+export const DateText = styled.Text`
+  font-weight: 400;
+  font-size: 14px;
+  color: gray;
+  margin-top: 5px;
 `

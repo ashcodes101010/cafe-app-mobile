@@ -4,6 +4,7 @@ import {
 } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import Carousel from 'react-native-reanimated-carousel'
+import { useQuery } from '@apollo/client'
 import { CAFE_IMAGES } from '../../../assets/cafeImages/constants'
 import ClockIcon from '../../../assets/icons/ClockIcon'
 import MapIcon from '../../../assets/icons/MapIcon'
@@ -26,9 +27,9 @@ import {
   TextAndIcon,
   ReviewText,
   ReviewsContainerTop,
-  StyledScrollView
+  StyledScrollView,
 } from './styles'
-import { ScrollView } from 'react-native-gesture-handler'
+import { GET_REVIEWS } from './graphql'
 
 const { width } = Dimensions.get('window')
 
@@ -36,7 +37,16 @@ const Cafe = ({ navigation, route }) => {
   const { id } = route.params
   const { locations } = useContext(Context)
   const [showMap, toggleMap] = useState(false)
+  const [reviews, setReviews] = useState([])
   const cafe = locations.find(c => c.id === id)
+
+  const { data } = useQuery(GET_REVIEWS, {
+    fetchPolicy: 'cache-and-network',
+    variables: { locationId: id },
+    onCompleted: () => setReviews(data.locationReviews),
+  })
+
+  const writtenReviews = reviews.filter(r => !!r.review)
 
   return (
     <>
@@ -106,8 +116,7 @@ const Cafe = ({ navigation, route }) => {
                     <RatingText>{`(${cafe.ratingInfo.numReviews})`}</RatingText>
                   </RatingContainer>
                 </ReviewsContainerTop>
-                <Review/>
-                <Review/>
+                {writtenReviews.map(r => <Review key={r.id} review={r} />)}
               </Body>
             </StyledScrollView>
           </>

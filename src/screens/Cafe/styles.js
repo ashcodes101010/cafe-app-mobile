@@ -67,13 +67,16 @@ export const ReviewText = styled.Text`
 
 export const ReviewsContainerTop = styled.View`
   flex-direction: row;
-  justifyContent: space-between;
+  justify-content: space-between;
   margin-bottom: 10px;
+  margin-top: 10px;
 `
 
 export const StyledScrollView = styled.ScrollView`
-  height: 61%;
-  flexGrow: 0;
+  flex-grow: 1;
+  background-color: transparent;
+  margin-bottom: 65px;
+  width: 100%;
 `
 
 export const hitSlop = {
