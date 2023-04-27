@@ -24,7 +24,7 @@ export const Container = styled.View`
 
 export const Title = styled.Text`
   font-weight: 600;
-  font-size: ${props => (props.length > 16 ? (16 / props.length) * 32 : 32)}px;
+  font-size: ${props => (props.length > 15 ? (15 / props.length) * 32 : 32)}px;
   text-align: left;
   color: #FFFFFF;
   text-decoration: ${props => (props.highlight ? 'underline' : 'none')};

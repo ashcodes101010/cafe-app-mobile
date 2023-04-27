@@ -26,6 +26,8 @@ import northwest from './northwest.jpeg'
 import northwest2 from './northwest2.jpeg'
 import quad from './quad.jpg'
 import quad2 from './quad2.jpg'
+import queensHead from './queensHead.jpg'
+import queensHead2 from './queensHead2.jpeg'
 import quincy from './quincy.jpg'
 import quincy2 from './quincy2.png'
 import sebastians from './sebastians.jpeg'
@@ -49,6 +51,7 @@ export const CAFE_IMAGES = {
   lise: [lise, lise2],
   northwest: [northwest, northwest2],
   quad: [quad, quad2],
+  queensHead: [queensHead, queensHead2],
   quincy: [quincy, quincy2],
   sebastians: [sebastians],
   sec: [sec, sec2],
