@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { StyleSheet } from 'react-native'
 import theme from '../../theme'
 
 export const MainView = styled.View`
@@ -6,6 +7,13 @@ export const MainView = styled.View`
   background-color: white;
   margin-top: 120px;
   padding: 23px;
+`
+
+export const StyledView = styled.View`
+  padding: 10px;
+  background-color: white;
+  borderBottomWidth: 1px;
+  borderBottomColor: #DEDEDE
 `
 
 export const Button = styled.TouchableOpacity`
@@ -25,3 +33,30 @@ export const ButtonText = styled.Text`
   color: white;
   font-weight: 500;
 `
+
+export const UserInfoText = styled.Text`
+  font-size: 16px;
+  color: black;
+  font-weight: 400;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: space-evenly;
+`
+
+export const UserInfo = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+export const PromptText = styled.Text`
+  color: #737373;
+`
+
+export const styles = StyleSheet.create({
+  input: {
+    backgroundColor: 'white',
+    padding: 0,
+    height: 20,
+    fontSize: 16,
+  },
+})

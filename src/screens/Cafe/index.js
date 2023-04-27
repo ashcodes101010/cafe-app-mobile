@@ -100,7 +100,7 @@ const Cafe = ({ navigation, route }) => {
                 </TextAndIcon>
                 <DescText>{cafe.description}</DescText>
                 <ReviewsContainerTop>
-                < ReviewText>Reviews</ReviewText>
+                  <ReviewText>Reviews</ReviewText>
                   <RatingContainer>
                     <StaticRatingStars rating={cafe.ratingInfo.avgRating} />
                     <RatingText>{`(${cafe.ratingInfo.numReviews})`}</RatingText>

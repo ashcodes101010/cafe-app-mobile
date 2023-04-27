@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { Text } from 'react-native'
+import React, { useContext, useState, useRef } from 'react'
+import { Text, TextInput } from 'react-native'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import { Context } from '../../context'
@@ -7,27 +7,75 @@ import {
   Button,
   ButtonText,
   MainView,
+  StyledView,
+  UserInfoText,
+  PromptText,
+  UserInfo,
+  styles
 } from './styles'
+import EditIcon from '../../../assets/icons/EditIcon'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const Profile = ({ navigation }) => {
   const { logOut, viewer: { viewer } } = useContext(Context)
+  const [name, updateName] = useState(viewer.fullName)
+  const [editName, toggleNameEdit] = useState(false)
+
+  const [boardPlus, updateBoardPlus] = useState(viewer.boardPlusBalance)
+  const [editBoardPlus, toggleBoardPlusEdit] = useState(false)
+
+  function onSubmitName() {
+    toggleNameEdit(false);
+    // TODO: add code to update name in server / db
+  }
+
+  function onSubmitBoardPlus() {
+    // only allow entering numbers
+    toggleBoardPlusEdit(false);
+    // TODO: add code to update boardplus in server / db
+  }
+
   return (
     <>
       <MainView>
-        <Text>
-          Name:
-          {' '}
-          {viewer.fullName}
-        </Text>
-        <Text>
-          Email:
-          {' '}
-          {viewer.email}
-        </Text>
-        <Text>
-          BoardPlus Balance: $
-          {viewer.boardPlusBalance}
-        </Text>
+        <StyledView>
+          <PromptText>
+            Name
+          </PromptText>
+          { editName ? (<TextInput style={styles.input} value={name} autofocus={true} onChangeText={(e) => updateName(e)} onSubmitEditing={onSubmitName}/>)
+          : (<UserInfo>
+              <UserInfoText numberOfLines={1}>
+                {name}
+              </UserInfoText>
+              <TouchableOpacity onPress={() => toggleNameEdit(!editName)}>
+                <EditIcon/>
+              </TouchableOpacity>
+            </UserInfo>)}
+        </StyledView>
+        <StyledView>
+          <PromptText>
+            Email:
+          </PromptText>
+          <UserInfo>
+            <UserInfoText numberOfLines={1}>
+              {viewer.email}
+            </UserInfoText>
+          </UserInfo>
+        </StyledView>
+        <StyledView>
+          <PromptText>
+            BoardPlus Balance
+          </PromptText>
+          { editBoardPlus ? (<TextInput style={styles.input} value={boardPlus} autofocus={true} onChangeText={(e) => updateBoardPlus(e)} onSubmitEditing={onSubmitBoardPlus}/>)
+          : (<UserInfo>
+              <UserInfoText numberOfLines={1}>
+                ${boardPlus}
+              </UserInfoText>
+              <TouchableOpacity onPress={() => toggleBoardPlusEdit(!editBoardPlus)}>
+                <EditIcon/>
+              </TouchableOpacity>
+            </UserInfo>)}
+        </StyledView>
         <Text />
         <Button onPress={() => logOut()}>
           <ButtonText>Log out</ButtonText>
