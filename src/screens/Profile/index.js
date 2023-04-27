@@ -30,7 +30,7 @@ const Profile = ({ navigation }) => {
   }
 
   function onSubmitBoardPlus() {
-    // only allow entering numbers
+    // TODO: only allow entering numbers, and make sure value between 0 and 130
     toggleBoardPlusEdit(false);
     // TODO: add code to update boardplus in server / db
   }
