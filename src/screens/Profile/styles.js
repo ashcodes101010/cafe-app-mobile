@@ -13,7 +13,7 @@ export const StyledView = styled.View`
   padding: 10px;
   background-color: white;
   borderBottomWidth: 1px;
-  borderBottomColor: #DEDEDE
+  borderBottomColor: #DEDEDE;
 `
 
 export const Button = styled.TouchableOpacity`
@@ -51,6 +51,13 @@ export const UserInfo = styled.View`
 export const PromptText = styled.Text`
   color: #737373;
 `
+
+export const hitSlop = {
+  top: 30,
+  bottom: 30,
+  left: 50,
+  right: 30,
+}
 
 export const styles = StyleSheet.create({
   input: {
