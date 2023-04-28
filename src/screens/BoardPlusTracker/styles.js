@@ -70,14 +70,6 @@ export const InnerTrackerText = styled.Text`
   align-self: center;
 `
 
-export const HistoryText = styled.Text`
-  font-weight: 600;
-  font-size: 32px;
-  text-align: left;
-  color: black;
-  margin-top: 10px;
-`
-
 export const Button = styled.TouchableOpacity`
   width: 140px;
   height: 42px;
@@ -96,8 +88,32 @@ export const ButtonText = styled.Text`
   font-weight: 500;
 `
 
+export const HistoryText = styled.Text`
+  font-weight: 600;
+  font-size: 22px;
+  text-align: left;
+  color: black;
+  margin-top: 40px;
+  margin-bottom: 5px;
+`
+
+export const PurchaseText = styled.Text`
+  font-weight: 400;
+  font-size: 14px;
+  color: ${theme.colors.pressableBlue};
+  margin-bottom: 5px;
+`
+
 export const Container = styled.View`
   flex-direction: row;
   align-items: flex-end;
   justify-content: space-between;
+  margin-top: 10px;
 `
+
+export const hitSlop = {
+  top: 30,
+  bottom: 30,
+  left: 30,
+  right: 30,
+}

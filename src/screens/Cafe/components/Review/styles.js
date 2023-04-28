@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import theme from '../../../../theme'
 
 export const ReviewContainer = styled.View`
   min-height: 80px;
@@ -27,5 +28,21 @@ export const DateText = styled.Text`
   font-weight: 400;
   font-size: 14px;
   color: gray;
+`
+
+export const LocationText = styled.Text`
+  font-weight: 400;
+  font-size: 14px;
+  color: ${theme.colors.pressableBlue};
+`
+
+export const Bottom = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
   margin-top: 5px;
 `
+
+export const hitSlop = {
+  top: 25, left: 30, right: 30, bottom: 25,
+}

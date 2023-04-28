@@ -6,6 +6,8 @@ import SignIn from '../screens/SignIn'
 import { Context } from '../context'
 import Profile from '../screens/Profile'
 import Cafe from '../screens/Cafe'
+import PurchaseHistory from '../screens/PurchaseHistory'
+import ReviewHistory from '../screens/ReviewHistory'
 
 const RootNavigator = () => {
   const Stack = createStackNavigator()
@@ -21,6 +23,8 @@ const RootNavigator = () => {
             <Stack.Screen name="BoardPlusTracker" component={BoardPlusTracker} />
             <Stack.Screen name="Profile" component={Profile} />
             <Stack.Screen name="Cafe" component={Cafe} getId={({ params }) => (params ? params.id : 0)} />
+            <Stack.Screen name="PurchaseHistory" component={PurchaseHistory} />
+            <Stack.Screen name="ReviewHistory" component={ReviewHistory} />
           </>
         )}
     </Stack.Navigator>

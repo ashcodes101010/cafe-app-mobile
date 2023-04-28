@@ -1,7 +1,7 @@
 import React, { useContext, useState, useRef } from 'react'
 import {
-  Keyboard,
-  Text, TextInput, TouchableOpacity, TouchableWithoutFeedback,
+  Keyboard, TextInput,
+  TouchableOpacity, TouchableWithoutFeedback,
 } from 'react-native'
 import { useMutation } from '@apollo/client'
 import Footer from '../../components/Footer'
@@ -17,6 +17,8 @@ import {
   UserInfo,
   styles,
   hitSlop,
+  HistoryText,
+  Bottom,
 } from './styles'
 import EditIcon from '../../../assets/icons/EditIcon'
 import { MAX_BALANCE } from '../BoardPlusTracker/constants'
@@ -107,7 +109,20 @@ const Profile = ({ navigation }) => {
                 </UserInfo>
               )}
           </StyledView>
-          <Text />
+          <Bottom>
+            <TouchableOpacity
+              hitSlop={hitSlop}
+              onPress={() => navigation.navigate('PurchaseHistory')}
+            >
+              <HistoryText style={{ marginRight: 60 }}>Purchase History</HistoryText>
+            </TouchableOpacity>
+            <TouchableOpacity
+              hitSlop={hitSlop}
+              onPress={() => navigation.navigate('ReviewHistory')}
+            >
+              <HistoryText>Review History</HistoryText>
+            </TouchableOpacity>
+          </Bottom>
           <Button onPress={() => logOut()}>
             <ButtonText>Log out</ButtonText>
           </Button>

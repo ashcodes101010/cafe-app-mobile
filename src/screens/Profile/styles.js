@@ -25,7 +25,7 @@ export const Button = styled.TouchableOpacity`
   align-items: center;
   padding: 10px;
   flex-direction: row;
-  margin-top: 20px;
+  margin-top: 80px;
 `
 
 export const ButtonText = styled.Text`
@@ -55,9 +55,23 @@ export const PromptText = styled.Text`
 export const hitSlop = {
   top: 30,
   bottom: 30,
-  left: 50,
-  right: 30,
+  left: 25,
+  right: 25,
 }
+
+export const HistoryText = styled.Text`
+  font-weight: 400;
+  font-size: 14px;
+  color: ${theme.colors.pressableBlue};
+`
+
+export const Bottom = styled.View`
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin-top: 20px;
+  align-self: center;
+`
 
 export const styles = StyleSheet.create({
   input: {

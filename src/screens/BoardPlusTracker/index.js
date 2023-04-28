@@ -1,24 +1,34 @@
+import { useQuery } from '@apollo/client'
 import React, { useContext } from 'react'
-import { Text } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import { Context } from '../../context'
+import PurchaseTable from '../PurchaseHistory/components/PurchaseTable'
 import {
   EXP_DATE, MAX_BALANCE, TRACKER_HEIGHT,
 } from './constants'
+import { BP_HISTORY } from './graphql'
 import {
   BalanceText, Line, MainView,
   TrackerInner, TrackerOuter, TrackerText,
-  HistoryText,
   InnerTrackerText,
   ButtonText,
   Button,
   Container,
+  HistoryText,
+  PurchaseText,
+  hitSlop,
 } from './styles'
-import PurchaseHistory from './components/PurchaseHistory'
 
 const BoardPlusTracker = ({ navigation }) => {
   const { viewer: { viewer: { boardPlusBalance } } } = useContext(Context)
+  const { data } = useQuery(BP_HISTORY, {
+    fetchPolicy: 'cache-and-network',
+  })
+
+  const history = data?.boardPlusPurchases || []
+
   return (
     <>
       <MainView>
@@ -50,8 +60,14 @@ const BoardPlusTracker = ({ navigation }) => {
             <ButtonText>Update Balance</ButtonText>
           </Button>
         </Container>
-        <HistoryText>History</HistoryText>
-        <PurchaseHistory />
+        <HistoryText>BoardPlus Purchases</HistoryText>
+        <TouchableOpacity
+          hitSlop={hitSlop}
+          onPress={() => navigation.navigate('PurchaseHistory')}
+        >
+          <PurchaseText>Full purchase history</PurchaseText>
+        </TouchableOpacity>
+        <PurchaseTable history={history} boardPlusOnly />
       </MainView>
       <Footer navigation={navigation} current="BoardPlusTracker" />
       <Header
