@@ -7,7 +7,13 @@ import {
   EXP_DATE, MAX_BALANCE, TRACKER_HEIGHT,
 } from './constants'
 import {
-  BalanceText, Line, MainView, TrackerInner, TrackerOuter, TrackerText, HistoryText
+  BalanceText, Line, MainView,
+  TrackerInner, TrackerOuter, TrackerText,
+  HistoryText,
+  InnerTrackerText,
+  ButtonText,
+  Button,
+  Container,
 } from './styles'
 import PurchaseHistory from './components/PurchaseHistory'
 
@@ -17,22 +23,35 @@ const BoardPlusTracker = ({ navigation }) => {
     <>
       <MainView>
         <Text>{`BoardPlus expires ${EXP_DATE}.`}</Text>
-        <TrackerOuter>
-          <Line>
-            <TrackerText>
-              {`$${MAX_BALANCE}`}
-            </TrackerText>
-          </Line>
-          <TrackerInner height={TRACKER_HEIGHT * (boardPlusBalance / MAX_BALANCE)}>
+        <Container>
+          <TrackerOuter>
             <Line>
               <TrackerText>
-                {`$${boardPlusBalance}`}
+                {`$${MAX_BALANCE}`}
               </TrackerText>
             </Line>
-          </TrackerInner>
-        </TrackerOuter>
+            <TrackerInner height={TRACKER_HEIGHT * (boardPlusBalance / MAX_BALANCE)}>
+              {boardPlusBalance / MAX_BALANCE > 0.15
+                ? (
+                  <InnerTrackerText>
+                    {`$${boardPlusBalance}`}
+                  </InnerTrackerText>
+                )
+                : (
+                  <Line>
+                    <TrackerText>
+                      {`$${boardPlusBalance}`}
+                    </TrackerText>
+                  </Line>
+                )}
+            </TrackerInner>
+          </TrackerOuter>
+          <Button onPress={() => navigation.replace('Profile')}>
+            <ButtonText>Update Balance</ButtonText>
+          </Button>
+        </Container>
         <HistoryText>History</HistoryText>
-        <PurchaseHistory/>
+        <PurchaseHistory />
       </MainView>
       <Footer navigation={navigation} current="BoardPlusTracker" />
       <Header

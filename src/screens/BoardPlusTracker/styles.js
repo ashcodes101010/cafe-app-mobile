@@ -58,10 +58,46 @@ export const TrackerText = styled.Text`
   color: black;
   width: 65px;
 `
+
+export const InnerTrackerText = styled.Text`
+  position: absolute;
+  top: 4px;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  color: white;
+  width: 65px;
+  align-self: center;
+`
+
 export const HistoryText = styled.Text`
   font-weight: 600;
   font-size: 32px;
   text-align: left;
   color: black;
   margin-top: 10px;
+`
+
+export const Button = styled.TouchableOpacity`
+  width: 140px;
+  height: 42px;
+  background-color: ${theme.colors.harvardCrimson};
+  border-radius: 7px;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px;
+  flex-direction: row;
+  margin-top: 20px;
+`
+
+export const ButtonText = styled.Text`
+  font-size: 14px;
+  color: white;
+  font-weight: 500;
+`
+
+export const Container = styled.View`
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
 `
