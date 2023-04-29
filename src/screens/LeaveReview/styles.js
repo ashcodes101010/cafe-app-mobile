@@ -17,7 +17,9 @@ export const StyledView = styled.View`
 `
 
 export const SubmitButtonRow = styled.View`
-  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `
 
 export const SubmitButton = styled.TouchableOpacity`
@@ -60,5 +62,9 @@ export const styles = StyleSheet.create({
       height: 100,
       fontSize: 16,
     },
+    checkbox: {
+      height: 20,
+      width: 20,
+    }
   })
   

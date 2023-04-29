@@ -17,12 +17,14 @@ import {
 } from './styles'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import BackIcon from '../../../assets/icons/BackIcon';
+import CheckBox from './components/Checkbox';
 
 const LeaveReview = ({ navigation, route }) => {
   const { cafeId, cafeName } = route.params;
 
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
+  const [anon, setAnon] = useState(false);
   
   function submitReview() {
     console.log(rating)
@@ -66,6 +68,7 @@ const LeaveReview = ({ navigation, route }) => {
                 />
             </StyledView>
             <SubmitButtonRow>
+                <CheckBox label='Post Anonymously?' status={anon ? 'checked' : 'unchecked'} onPress={() => setAnon(!anon)}/>
                 <SubmitButton onPress={submitReview}>
                     <SubmitButtonText>Submit</SubmitButtonText>
                 </SubmitButton>
