@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import {
-  Dimensions, Image, TouchableOpacity,
+  Dimensions, Image, TouchableOpacity
 } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import Carousel from 'react-native-reanimated-carousel'
@@ -30,6 +30,8 @@ import {
   StyledScrollView,
   styles,
   NoReviewText,
+  StyledButtonsView,
+  BlueButtonText
 } from './styles'
 import { GET_REVIEWS } from './graphql'
 import ExternalLink from '../../components/ExternalLink'
@@ -115,6 +117,10 @@ const Cafe = ({ navigation, route }) => {
                   {cafe.description}
                   <ExternalLink link={cafe.externalLink} style={styles.externalLink} />
                 </DescText>
+                <StyledButtonsView>
+                  <TouchableOpacity onPress={() => navigation.navigate('LeaveReview', { cafeName: cafe.fullName, cafeId: id })}><BlueButtonText>Leave a Review</BlueButtonText></TouchableOpacity>
+                  <TouchableOpacity><BlueButtonText>Track a Visit</BlueButtonText></TouchableOpacity>
+                </StyledButtonsView>
                 <ReviewsContainerTop>
                   <ReviewText>Reviews</ReviewText>
                   <RatingContainer>

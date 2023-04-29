@@ -88,6 +88,19 @@ export const StyledScrollView = styled.ScrollView`
   width: 100%;
 `
 
+export const StyledButtonsView = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20;
+`
+
+export const BlueButtonText = styled.Text`
+  font-weight: 500;
+  font-size: 18;
+  color: #23A6F0;
+`
+
 export const hitSlop = {
   top: 30,
   bottom: 30,
