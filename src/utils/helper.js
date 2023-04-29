@@ -29,6 +29,16 @@ const daysOfWeek = [
   'saturday',
 ]
 
+const daysOfWeekV2 = [
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday',
+  'sunday',
+]
+
 const daysOfWeekAbbr = {
   sunday: 'Su',
   monday: 'M',
@@ -57,7 +67,7 @@ const formatDayInterval = week => {
   let start = ''
   let end = ''
   let potentialEndReached = false
-  daysOfWeek.forEach(day => {
+  daysOfWeekV2.forEach(day => {
     if (week[day]) {
       if (!start || potentialEndReached) {
         start = daysOfWeekAbbr[day]

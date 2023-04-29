@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native'
 import styled from 'styled-components'
 import theme from '../../theme'
 
@@ -65,6 +66,14 @@ export const ReviewText = styled.Text`
   margin-top: 10px;
 `
 
+export const NoReviewText = styled.Text`
+  font-weight: 600;
+  font-size: 14px;
+  text-align: left;
+  color: gray;
+  margin-top: 5px;
+`
+
 export const ReviewsContainerTop = styled.View`
   flex-direction: row;
   justify-content: space-between;
@@ -85,3 +94,10 @@ export const hitSlop = {
   left: 30,
   right: 30,
 }
+
+export const styles = StyleSheet.create({
+  externalLink: {
+    paddingLeft: 50,
+    fontWeight: 600,
+  },
+})

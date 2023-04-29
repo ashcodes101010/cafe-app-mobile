@@ -28,8 +28,11 @@ import {
   ReviewText,
   ReviewsContainerTop,
   StyledScrollView,
+  styles,
+  NoReviewText,
 } from './styles'
 import { GET_REVIEWS } from './graphql'
+import ExternalLink from '../../components/ExternalLink'
 
 const { width } = Dimensions.get('window')
 
@@ -108,7 +111,10 @@ const Cafe = ({ navigation, route }) => {
                   <IconText>{formatCafeHours(cafe.hours)}</IconText>
                   {isLocationOpen(cafe.hours) && <OpenText>Open Now!</OpenText>}
                 </TextAndIcon>
-                <DescText>{cafe.description}</DescText>
+                <DescText>
+                  {cafe.description}
+                  <ExternalLink link={cafe.externalLink} style={styles.externalLink} />
+                </DescText>
                 <ReviewsContainerTop>
                   <ReviewText>Reviews</ReviewText>
                   <RatingContainer>
@@ -116,6 +122,7 @@ const Cafe = ({ navigation, route }) => {
                     <RatingText>{`(${cafe.ratingInfo.numReviews})`}</RatingText>
                   </RatingContainer>
                 </ReviewsContainerTop>
+                {!writtenReviews.length && <NoReviewText>No written reviews.</NoReviewText>}
                 {writtenReviews.map(r => <Review key={r.id} review={r} />)}
               </Body>
             </StyledScrollView>
