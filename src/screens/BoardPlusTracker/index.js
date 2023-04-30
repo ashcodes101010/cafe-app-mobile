@@ -19,6 +19,7 @@ import {
   HistoryText,
   PurchaseText,
   hitSlop,
+  ColumnView,
 } from './styles'
 
 const BoardPlusTracker = ({ navigation }) => {
@@ -56,9 +57,14 @@ const BoardPlusTracker = ({ navigation }) => {
                 )}
             </TrackerInner>
           </TrackerOuter>
-          <Button onPress={() => navigation.replace('Profile')}>
-            <ButtonText>Update Balance</ButtonText>
-          </Button>
+          <ColumnView>
+            <Button onPress={() => navigation.replace('TrackVisit')}>
+              <ButtonText>Track Purchase</ButtonText>
+            </Button>
+            <Button onPress={() => navigation.replace('Profile')}>
+              <ButtonText>Update Balance</ButtonText>
+            </Button>
+          </ColumnView>
         </Container>
         <HistoryText>BoardPlus Purchases</HistoryText>
         <TouchableOpacity

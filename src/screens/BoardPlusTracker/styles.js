@@ -18,6 +18,10 @@ export const MainView = styled.View`
   padding: 23px;
 `
 
+export const ColumnView = styled.View`
+  flex-direction: column;
+`
+
 export const TrackerOuter = styled.View`
   height: ${TRACKER_HEIGHT}px;
   width: 100px;

@@ -27,7 +27,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { ADD_PURCHASE, GET_CAFES } from './graphql';
 
 const TrackVisit = ({ navigation, route }) => {
-  const { cafeId, cafeName } = route.params;
+  const { cafeId } = route.params ? route.params : '';
 
   const [open, setOpen] = useState(false);
   const [location, setLocation] = useState(cafeId);
@@ -37,7 +37,7 @@ const TrackVisit = ({ navigation, route }) => {
   const [cost, setCost] = useState('')
 
   const [openMethod, setOpenMethod] = useState(false);
-  const [method, setMethod] = useState('BoardPlus')
+  const [method, setMethod] = useState('BoardPlus');
   const methods = [
     {label: 'BoardPlus', value: 'BoardPlus'},
     {label: 'CrimsonCash', value: 'CrimsonCash'},
@@ -89,7 +89,7 @@ const TrackVisit = ({ navigation, route }) => {
               color={theme.colors.harvardCrimson}
             />
             )}
-            <BackButton onPress={() => navigation.push('Cafe', { id: cafeId })}>
+            <BackButton onPress={() => route.params ? navigation.push('Cafe', { id: cafeId }) : navigation.push('BoardPlusTracker', { id: cafeId })}>
                 <BackIcon size={30}/>
                 <BackButtonText>Back</BackButtonText>
             </BackButton>
@@ -99,6 +99,7 @@ const TrackVisit = ({ navigation, route }) => {
               <PromptText>Location:</PromptText>
               <DropDownPicker
                 containerStyle={styles.containerPicker}
+                placeholder={'Select a Location'}
                 textStyle={styles.label}
                 labelStyle={styles.label}
                 open={open}
