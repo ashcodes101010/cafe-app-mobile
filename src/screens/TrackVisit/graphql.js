@@ -7,3 +7,11 @@ export const ADD_PURCHASE = gql`
     }
   }
 `
+export const GET_CAFES = gql`
+  query getLocations {
+    getLocations {
+      id
+      fullName
+    }
+  }
+`

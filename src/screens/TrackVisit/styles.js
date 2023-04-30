@@ -14,7 +14,7 @@ export const HorizontalView = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 `
 
 export const SubmitButtonRow = styled.View`
@@ -36,7 +36,6 @@ export const SubmitButton = styled.TouchableOpacity`
 
 export const BackButton = styled.TouchableOpacity`
   align-self: flex-start;
-//   border-radius: 7px;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: row;
@@ -76,11 +75,13 @@ export const styles = StyleSheet.create({
       height: 20,
       fontSize: 16,
     },
-    picker: {
-      // height: 20,
+    containerPicker: {
       marginTop: -10,
-      width: 180,
-      margin: 0,
+      width: 250,
+      borderColor: '#737373'
+    },
+    label: {
+      fontSize: 18,
     },
     item: {
       height: 50,
