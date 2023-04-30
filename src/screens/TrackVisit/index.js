@@ -1,4 +1,5 @@
-import React, { useContext, useState, useRef } from 'react'
+import React, { useContext, useState, useRef, useEffect } from 'react'
+import { useIsFocused } from '@react-navigation/native'
 import { AirbnbRating } from 'react-native-ratings';
 import {
   Keyboard, TouchableWithoutFeedback, TextInput, Text
@@ -6,8 +7,9 @@ import {
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import {Picker} from '@react-native-picker/picker';
+import { useMutation } from '@apollo/client'
 import {
-    BackButton,
+  BackButton,
   BackButtonText,
   MainView,
   StyledView,
@@ -19,9 +21,9 @@ import {
   AnswerText,
   styles
 } from './styles'
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import BackIcon from '../../../assets/icons/BackIcon';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
+import { ADD_PURCHASE } from './graphql';
 
 const TrackVisit = ({ navigation, route }) => {
   const { cafeId, cafeName } = route.params;
@@ -30,14 +32,23 @@ const TrackVisit = ({ navigation, route }) => {
   const [cost, setCost] = useState('')
   const [method, setMethod] = useState('BoardPlus')
 
+  const [addPurchase] = useMutation(ADD_PURCHASE, {
+  })
+
+  const isFocused = useIsFocused()
+
+  useEffect(() => {
+    if (isFocused) {
+      setCost('');
+      setDate(new Date());
+      setMethod('BoardPlus');
+    }
+ }, [isFocused]);
+
   function submitVisit() {
-    console.log(date)
-    console.log(cost)
-    console.log(method)
-    console.log(cafeName)
     if (cost.length > 0) {
-        // TODO: submit info
-        navigation.navigate('Cafe', { id: cafeId })
+        addPurchase({ variables: { input: { locationId: cafeId, amount: parseFloat(cost), paymentMethod: method, purchaseDate: date } } });
+        navigation.push('Cafe', { id: cafeId })
     }
   }
   
@@ -45,7 +56,7 @@ const TrackVisit = ({ navigation, route }) => {
     <>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <MainView>
-            <BackButton onPress={() => navigation.navigate('Cafe', { id: cafeId })}>
+            <BackButton onPress={() => navigation.push('Cafe', { id: cafeId })}>
                 <BackIcon size={30}/>
                 <BackButtonText>Back</BackButtonText>
             </BackButton>
