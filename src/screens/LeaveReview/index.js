@@ -28,6 +28,8 @@ const LeaveReview = ({ navigation, route }) => {
   
   function submitReview() {
     console.log(rating)
+    console.log(anon)
+    console.log(review)
     if (review.length == 0 && rating > 0) {
         // submit only rating
         navigation.navigate('Cafe', { id: cafeId })

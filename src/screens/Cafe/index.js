@@ -119,7 +119,7 @@ const Cafe = ({ navigation, route }) => {
                 </DescText>
                 <StyledButtonsView>
                   <TouchableOpacity onPress={() => navigation.navigate('LeaveReview', { cafeName: cafe.fullName, cafeId: id })}><BlueButtonText>Leave a Review</BlueButtonText></TouchableOpacity>
-                  <TouchableOpacity><BlueButtonText>Track a Visit</BlueButtonText></TouchableOpacity>
+                  <TouchableOpacity onPress={() => navigation.navigate('TrackVisit', { cafeName: cafe.fullName, cafeId: id })}><BlueButtonText>Track a Visit</BlueButtonText></TouchableOpacity>
                 </StyledButtonsView>
                 <ReviewsContainerTop>
                   <ReviewText>Reviews</ReviewText>

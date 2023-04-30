@@ -9,6 +9,7 @@ import Cafe from '../screens/Cafe'
 import PurchaseHistory from '../screens/PurchaseHistory'
 import ReviewHistory from '../screens/ReviewHistory'
 import LeaveReview from '../screens/LeaveReview'
+import TrackVisit from '../screens/TrackVisit'
 
 const RootNavigator = () => {
   const Stack = createStackNavigator()
@@ -27,6 +28,7 @@ const RootNavigator = () => {
             <Stack.Screen name="PurchaseHistory" component={PurchaseHistory} />
             <Stack.Screen name="ReviewHistory" component={ReviewHistory} />
             <Stack.Screen name="LeaveReview" component={LeaveReview} />
+            <Stack.Screen name="TrackVisit" component={TrackVisit} />
           </>
         )}
     </Stack.Navigator>

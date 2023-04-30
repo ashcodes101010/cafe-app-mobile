@@ -9,20 +9,20 @@ export const MainView = styled.View`
   padding: 23px;
 `
 
-export const StyledView = styled.View`
-  padding: 10px;
+export const HorizontalView = styled.View`
   background-color: white;
-  borderBottomWidth: 1px;
-  borderBottomColor: #DEDEDE;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
 `
 
 export const SubmitButtonRow = styled.View`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 `
 
 export const SubmitButton = styled.TouchableOpacity`
+  align-self: flex-end;
   width: 90px;
   height: 42px;
   background-color: ${theme.colors.harvardCrimson};
@@ -55,17 +55,36 @@ export const SubmitButtonText = styled.Text`
   font-weight: 500;
 `
 
+export const PromptText = styled.Text`
+  margin-top: 6px;
+  font-size: 18px;
+  color: black;
+  font-weight: 500;
+`
+
+export const AnswerText = styled.Text`
+  margin-top: 6px;
+  font-size: 18px;
+  color: #737373;
+  font-weight: 400;
+`
+
 export const styles = StyleSheet.create({
     input: {
       backgroundColor: 'white',
-      padding: 0,
-      height: 100,
+      marginTop: 8,
+      height: 20,
       fontSize: 16,
     },
-    checkbox: {
-      height: 20,
-      width: 20,
-      
+    picker: {
+      // height: 20,
+      marginTop: -10,
+      width: 180,
+      margin: 0,
+    },
+    item: {
+      height: 50,
+      fontSize: 18,
     }
   })
   
