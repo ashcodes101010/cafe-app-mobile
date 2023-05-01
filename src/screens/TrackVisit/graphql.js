@@ -7,3 +7,9 @@ export const ADD_PURCHASE = gql`
     }
   }
 `
+
+export const UPDATE_BALANCE = gql`
+  mutation updateBPBalance($boardPlusBalance: Float) {
+    updateBPBalance(boardPlusBalance: $boardPlusBalance)
+  }
+`
