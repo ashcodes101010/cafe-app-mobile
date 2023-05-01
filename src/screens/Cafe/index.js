@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
-  Dimensions, Image, TouchableOpacity
+  Dimensions, Image, TouchableOpacity,
 } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import Carousel from 'react-native-reanimated-carousel'
@@ -31,7 +31,7 @@ import {
   styles,
   NoReviewText,
   StyledButtonsView,
-  BlueButtonText
+  BlueButtonText,
 } from './styles'
 import { GET_REVIEWS } from './graphql'
 import ExternalLink from '../../components/ExternalLink'
@@ -42,16 +42,21 @@ const Cafe = ({ navigation, route }) => {
   const { id } = route.params
   const { locations } = useContext(Context)
   const [showMap, toggleMap] = useState(false)
-  const [reviews, setReviews] = useState([])
   const cafe = locations.find(c => c.id === id)
 
-  const { data } = useQuery(GET_REVIEWS, {
+  const { data, loading, refetch } = useQuery(GET_REVIEWS, {
     fetchPolicy: 'cache-and-network',
     variables: { locationId: id },
-    onCompleted: () => setReviews(data.locationReviews),
   })
 
-  const writtenReviews = reviews.filter(r => !!r.review)
+  const writtenReviews = (data?.locationReviews || []).filter(r => !!r.review)
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', refetch)
+    return unsubscribe
+  }, [navigation])
+
+  const noReviews = data && !loading && !writtenReviews.length
 
   return (
     <>
@@ -118,8 +123,12 @@ const Cafe = ({ navigation, route }) => {
                   <ExternalLink link={cafe.externalLink} style={styles.externalLink} />
                 </DescText>
                 <StyledButtonsView>
-                  <TouchableOpacity onPress={() => navigation.navigate('LeaveReview', { cafeName: cafe.fullName, cafeId: id, onCompleted: (data) => setReviews(data.locationReviews) })}><BlueButtonText>Leave a Review</BlueButtonText></TouchableOpacity>
-                  <TouchableOpacity onPress={() => navigation.navigate('TrackVisit', { cafeId: id })}><BlueButtonText>Track a Visit</BlueButtonText></TouchableOpacity>
+                  <TouchableOpacity onPress={() => navigation.navigate('LeaveReview', { cafeName: cafe.fullName, cafeId: id })} hitSlop={hitSlop}>
+                    <BlueButtonText>Leave a Review</BlueButtonText>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => navigation.navigate('TrackVisit', { cafeId: id })} hitSlop={hitSlop}>
+                    <BlueButtonText>Track a Visit</BlueButtonText>
+                  </TouchableOpacity>
                 </StyledButtonsView>
                 <ReviewsContainerTop>
                   <ReviewText>Reviews</ReviewText>
@@ -128,7 +137,7 @@ const Cafe = ({ navigation, route }) => {
                     <RatingText>{`(${cafe.ratingInfo.numReviews})`}</RatingText>
                   </RatingContainer>
                 </ReviewsContainerTop>
-                {!writtenReviews.length && <NoReviewText>No written reviews.</NoReviewText>}
+                {noReviews && <NoReviewText>No written reviews.</NoReviewText>}
                 {writtenReviews.map(r => <Review key={r.id} review={r} />)}
               </Body>
             </StyledScrollView>

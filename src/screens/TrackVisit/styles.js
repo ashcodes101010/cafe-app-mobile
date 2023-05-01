@@ -25,7 +25,7 @@ export const SubmitButton = styled.TouchableOpacity`
   align-self: flex-end;
   width: 90px;
   height: 42px;
-  background-color: ${theme.colors.harvardCrimson};
+  background-color: ${props => (props.disabled ? 'gray' : theme.colors.harvardCrimson)};
   border-radius: 7px;
   justify-content: space-evenly;
   align-items: center;
@@ -39,7 +39,7 @@ export const BackButton = styled.TouchableOpacity`
   justify-content: space-evenly;
   align-items: center;
   flex-direction: row;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 `
 
 export const BackButtonText = styled.Text`
@@ -68,24 +68,32 @@ export const AnswerText = styled.Text`
   font-weight: 400;
 `
 
+export const inputHitSlop = {
+  top: 20,
+  bottom: 20,
+  right: 20,
+  left: 10,
+}
+
 export const styles = StyleSheet.create({
-    input: {
-      backgroundColor: 'white',
-      marginTop: 8,
-      height: 20,
-      fontSize: 16,
-    },
-    containerPicker: {
-      marginTop: -10,
-      width: 250,
-      borderColor: '#737373'
-    },
-    label: {
-      fontSize: 18,
-    },
-    item: {
-      height: 50,
-      fontSize: 18,
-    }
-  })
-  
+  input: {
+    backgroundColor: 'transparent',
+    marginTop: 8,
+    height: 20,
+    fontSize: 16,
+    width: '40%',
+    textAlign: 'right',
+  },
+  containerPicker: {
+    marginTop: -10,
+    width: 250,
+    borderColor: '#737373',
+  },
+  label: {
+    fontSize: 18,
+  },
+  item: {
+    height: 50,
+    fontSize: 18,
+  },
+})

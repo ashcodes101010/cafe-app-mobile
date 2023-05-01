@@ -92,12 +92,12 @@ export const StyledButtonsView = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 20;
+  margin-top: 20px;
 `
 
 export const BlueButtonText = styled.Text`
   font-weight: 500;
-  font-size: 18;
+  font-size: 18px;
   color: #23A6F0;
 `
 

@@ -16,7 +16,12 @@ const RootNavigator = () => {
   const { isSignedIn } = useContext(Context)
 
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false, animationEnabled: false, unmountOnBlur: true }}>
+    <Stack.Navigator screenOptions={{
+      headerShown: false,
+      animationEnabled: false,
+      unmountOnBlur: true,
+    }}
+    >
       {!isSignedIn
         ? <Stack.Screen name="SignIn" component={SignIn} />
         : (
@@ -27,8 +32,8 @@ const RootNavigator = () => {
             <Stack.Screen name="Cafe" component={Cafe} getId={({ params }) => (params ? params.id : 0)} />
             <Stack.Screen name="PurchaseHistory" component={PurchaseHistory} />
             <Stack.Screen name="ReviewHistory" component={ReviewHistory} />
-            <Stack.Screen name="LeaveReview" component={LeaveReview} options={{unmountOnBlur: true}} />
-            <Stack.Screen name="TrackVisit" component={TrackVisit} options={{unmountOnBlur: true}} />
+            <Stack.Screen name="LeaveReview" component={LeaveReview} options={{ unmountOnBlur: true }} />
+            <Stack.Screen name="TrackVisit" component={TrackVisit} options={{ unmountOnBlur: true }} />
           </>
         )}
     </Stack.Navigator>

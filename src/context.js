@@ -1,10 +1,10 @@
-/* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react'
 import * as Location from 'expo-location'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useQuery } from '@apollo/client'
+import { useLazyQuery, useQuery } from '@apollo/client'
 import * as SplashScreen from 'expo-splash-screen'
 import { VIEWER } from './viewer'
+import { GET_CAFES } from './screens/Main/graphql'
 
 export const Context = React.createContext()
 
@@ -15,7 +15,6 @@ export const ContextProvider = ({ children }) => {
   const [location, setLocation] = useState(null)
   const [isSignedIn, setIsSignedIn] = useState(undefined)
   const [initial, setInitial] = useState(true)
-  const [locations, setLocations] = useState([])
 
   const { data, loading, refetch } = useQuery(VIEWER, {
     notifyOnNetworkStatusChange: true,
@@ -30,6 +29,11 @@ export const ContextProvider = ({ children }) => {
         await new Promise(() => setTimeout(async () => SplashScreen.hideAsync(), 1000))
       }
     },
+  })
+
+  const [getCafes, { data: cafeData }] = useLazyQuery(GET_CAFES, {
+    fetchPolicy: 'cache-and-network',
+    notifyOnNetworkStatusChange: true,
   })
 
   const viewer = { ...data, loading, refetch }
@@ -62,11 +66,12 @@ export const ContextProvider = ({ children }) => {
 
   return (
     <Context.Provider value={{
+      cafeData,
       isSignedIn,
       location,
-      locations,
+      locations: cafeData?.getLocations || [],
       logOut,
-      setLocations,
+      getCafes,
       viewer,
     }}
     >

@@ -13,3 +13,9 @@ export const USER_REVIEWS = gql`
     }
   }
 `
+
+export const DELETE_REVIEW = gql`
+  mutation deleteReview($id: ID!) {
+    deleteReview(id: $id)
+  }
+`

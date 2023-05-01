@@ -25,7 +25,7 @@ export const SubmitButtonRow = styled.View`
 export const SubmitButton = styled.TouchableOpacity`
   width: 90px;
   height: 42px;
-  background-color: ${theme.colors.harvardCrimson};
+  background-color: ${props => (props.disabled ? 'gray' : theme.colors.harvardCrimson)};
   border-radius: 7px;
   justify-content: space-evenly;
   align-items: center;
@@ -56,16 +56,15 @@ export const SubmitButtonText = styled.Text`
 `
 
 export const styles = StyleSheet.create({
-    input: {
-      backgroundColor: 'white',
-      padding: 0,
-      height: 100,
-      fontSize: 16,
-    },
-    checkbox: {
-      height: 20,
-      width: 20,
-      
-    }
-  })
-  
+  input: {
+    backgroundColor: 'white',
+    padding: 0,
+    height: 100,
+    fontSize: 16,
+  },
+  checkbox: {
+    height: 20,
+    width: 20,
+
+  },
+})

@@ -1,5 +1,4 @@
-import { useQuery } from '@apollo/client'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
   Image, TouchableOpacity, View,
 } from 'react-native'
@@ -16,7 +15,6 @@ import {
 } from '../../utils/helper'
 import Map from './components/Map'
 import { INIT_POS } from './components/Map/constants'
-import { GET_CAFES } from './graphql'
 import {
   AddressText,
   Buttons,
@@ -26,22 +24,24 @@ import {
 } from './styles'
 
 const Main = ({ navigation }) => {
-  const { location, locations, setLocations } = useContext(Context)
+  const {
+    location, locations, cafeData, getCafes,
+  } = useContext(Context)
   const [showMap, toggleMap] = useState(false)
-  const { data } = useQuery(GET_CAFES, {
-    fetchPolicy: 'cache-and-network',
-    onCompleted: () => setLocations(data.getLocations),
-  })
-
   const sortedLocations = location
     ? [...locations]
       .sort((a, b) => compareHoursLocations(a, b, location))
     : [...locations].sort((a, b) => compareHours(a, b))
 
+  useEffect(() => {
+    const loadData = async () => getCafes()
+    loadData()
+  }, [])
+
   return (
     <>
       <View>
-        {!data && (
+        {!cafeData && (
         <ActivityIndicator
           style={styles.loading}
           animating

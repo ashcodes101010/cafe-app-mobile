@@ -5,11 +5,11 @@ export const MainView = styled.View`
   flex: 1;
   background-color: white;
   margin-top: 120px;
+  margin-bottom: 65px;
 `
 
 export const styles = StyleSheet.create({
   scroll: {
-    height: '40%',
     flexGrow: 0,
   },
   date: {

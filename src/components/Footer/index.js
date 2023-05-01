@@ -8,7 +8,7 @@ const Footer = ({ navigation, current }) => (
     {PATHS.map(({ path, label }) => (
       <TouchableOpacity
         key={label}
-        onPress={() => navigation.replace(path)}
+        onPress={() => navigation.navigate(path)}
         hitSlop={hitSlop}
       >
         <FooterText highlight={path === current}>{label}</FooterText>

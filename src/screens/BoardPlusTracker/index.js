@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Text, TouchableOpacity } from 'react-native'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
@@ -24,11 +24,16 @@ import {
 
 const BoardPlusTracker = ({ navigation }) => {
   const { viewer: { viewer: { boardPlusBalance } } } = useContext(Context)
-  const { data } = useQuery(BP_HISTORY, {
+  const { data, refetch } = useQuery(BP_HISTORY, {
     fetchPolicy: 'cache-and-network',
   })
 
   const history = data?.boardPlusPurchases || []
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', refetch)
+    return unsubscribe
+  }, [navigation])
 
   return (
     <>
@@ -58,10 +63,10 @@ const BoardPlusTracker = ({ navigation }) => {
             </TrackerInner>
           </TrackerOuter>
           <ColumnView>
-            <Button onPress={() => navigation.replace('TrackVisit')}>
+            <Button onPress={() => navigation.navigate('TrackVisit')}>
               <ButtonText>Track Purchase</ButtonText>
             </Button>
-            <Button onPress={() => navigation.replace('Profile')}>
+            <Button onPress={() => navigation.navigate('Profile')}>
               <ButtonText>Update Balance</ButtonText>
             </Button>
           </ColumnView>

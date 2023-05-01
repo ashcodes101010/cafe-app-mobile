@@ -87,6 +87,7 @@ const Profile = ({ navigation }) => {
                 onBlur={onSubmitBoardPlus}
                 onChangeText={e => updateBoardPlus(e)}
                 onSubmitEditing={onSubmitBoardPlus}
+                returnKeyType="done"
               />
             )
               : (
