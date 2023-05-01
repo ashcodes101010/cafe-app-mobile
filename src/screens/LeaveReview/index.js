@@ -11,8 +11,6 @@ import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import { ADD_REVIEW } from './graphql'
 import {
-  BackButton,
-  BackButtonText,
   MainView,
   StyledView,
   SubmitButton,
@@ -20,9 +18,9 @@ import {
   SubmitButtonText,
   styles,
 } from './styles'
-import BackIcon from '../../../assets/icons/BackIcon'
 import CheckBox from './components/Checkbox'
 import { Context } from '../../context'
+import BackButton from '../../components/BackButton'
 
 const LeaveReview = ({ navigation, route }) => {
   const { cafeId, cafeName } = route.params
@@ -62,10 +60,7 @@ const LeaveReview = ({ navigation, route }) => {
     <>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <MainView>
-          <BackButton onPress={() => navigation.push('Cafe', { id: cafeId })}>
-            <BackIcon size={30} />
-            <BackButtonText>Back</BackButtonText>
-          </BackButton>
+          <BackButton navigation={navigation} styles={styles.backButton} />
           <StyledView>
             <AirbnbRating
               showRating={false}

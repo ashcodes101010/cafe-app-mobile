@@ -22,4 +22,9 @@ export const styles = StyleSheet.create({
   loading: {
     marginTop: 150,
   },
+  backButton: {
+    marginBottom: 10,
+    marginLeft: 20,
+    marginTop: 20,
+  },
 })

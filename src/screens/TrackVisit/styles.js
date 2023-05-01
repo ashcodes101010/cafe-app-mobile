@@ -34,20 +34,6 @@ export const SubmitButton = styled.TouchableOpacity`
   margin-top: 20px;
 `
 
-export const BackButton = styled.TouchableOpacity`
-  align-self: flex-start;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: row;
-  margin-bottom: 30px;
-`
-
-export const BackButtonText = styled.Text`
-  font-size: 16px;
-  color: #737373;
-  font-weight: 500;
-`
-
 export const SubmitButtonText = styled.Text`
   font-size: 16px;
   color: white;
@@ -95,5 +81,8 @@ export const styles = StyleSheet.create({
   item: {
     height: 50,
     fontSize: 18,
+  },
+  backButton: {
+    marginBottom: 30,
   },
 })

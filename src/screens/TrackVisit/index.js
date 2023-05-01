@@ -9,8 +9,6 @@ import DropDownPicker from 'react-native-dropdown-picker'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import {
-  BackButton,
-  BackButtonText,
   MainView,
   HorizontalView,
   PromptText,
@@ -20,10 +18,9 @@ import {
   styles,
   inputHitSlop,
 } from './styles'
-import BackIcon from '../../../assets/icons/BackIcon'
-
 import { ADD_PURCHASE } from './graphql'
 import { Context } from '../../context'
+import BackButton from '../../components/BackButton'
 
 const TrackVisit = ({ navigation, route }) => {
   const { cafeId } = route.params || {}
@@ -78,10 +75,7 @@ const TrackVisit = ({ navigation, route }) => {
     <>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <MainView>
-          <BackButton onPress={() => navigation.goBack()}>
-            <BackIcon size={30} />
-            <BackButtonText>Back</BackButtonText>
-          </BackButton>
+          <BackButton navigation={navigation} style={styles.backButton} />
 
           {/* location selector, default to current location */}
           <HorizontalView style={{ zIndex: 3 }}>

@@ -18,4 +18,9 @@ export const styles = StyleSheet.create({
   dataText: {
     fontSize: 12,
   },
+  backButton: {
+    marginBottom: 10,
+    marginLeft: 20,
+    marginTop: 20,
+  },
 })

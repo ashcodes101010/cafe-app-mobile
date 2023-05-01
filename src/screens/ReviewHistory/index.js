@@ -12,6 +12,7 @@ import {
 } from './styles'
 import { USER_REVIEWS } from './graphql'
 import theme from '../../theme'
+import BackButton from '../../components/BackButton'
 
 const ReviewHistory = ({ navigation }) => {
   const { data, loading } = useQuery(USER_REVIEWS, {
@@ -23,6 +24,7 @@ const ReviewHistory = ({ navigation }) => {
   return (
     <>
       <MainView>
+        <BackButton navigation={navigation} style={styles.backButton} />
         <StyledScrollView>
           <Body>
             {loading && !data && (
