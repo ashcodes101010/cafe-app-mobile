@@ -35,6 +35,8 @@ const Profile = ({ navigation }) => {
     onCompleted: () => refetch(),
   })
 
+  // CONCEPT: BoardPlus Balance 
+  // ACTION: resetBalance()
   const onSubmitBoardPlus = () => {
     let numFloat = parseFloat(boardPlus)
     if (Number.isNaN(numFloat)) {

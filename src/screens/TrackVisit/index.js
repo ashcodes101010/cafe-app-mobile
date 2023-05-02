@@ -45,7 +45,11 @@ const TrackVisit = ({ navigation, route }) => {
   const [updateBalance] = useMutation(UPDATE_BALANCE, {
     onCompleted: () => refetch(),
   })
+  
+  // CONCEPT: Purchase
+  // ACTION: logPurchase(purchaseInput)
 
+  // Updates purchase table in DB
   const [addPurchase] = useMutation(ADD_PURCHASE, {
     variables: {
       input: {
@@ -58,6 +62,7 @@ const TrackVisit = ({ navigation, route }) => {
     onCompleted: () => navigation.goBack(),
   })
 
+  // Submits purchase and updates BoardPlus balance
   const submitPurchase = () => {
     addPurchase();
     if (method == 'BoardPlus') {
