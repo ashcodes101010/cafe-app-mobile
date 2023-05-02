@@ -27,7 +27,7 @@ export const CafeContainer = styled.View`
 
 export const CafeContainerRight = styled.View`
   margin-left: 25px;
-  width: 50%;
+  width: 54%;
 `
 
 export const CafeName = styled.Text`

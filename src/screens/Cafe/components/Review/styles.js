@@ -40,7 +40,7 @@ export const DeleteText = styled.Text`
   font-weight: 600;
   font-size: 15px;
   color: gray;
-  margin-top: 4;
+  margin-top: 4px;
 `
 
 export const LocationText = styled.Text`
