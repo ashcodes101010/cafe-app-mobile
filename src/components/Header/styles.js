@@ -22,6 +22,12 @@ export const Container = styled.View`
   shadow-radius: 13px;
 `
 
+export const LeftContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+`
+
 export const Title = styled.Text`
   font-weight: 600;
   font-size: ${props => (props.length > 15 ? (15 / props.length) * 32 : 32)}px;
@@ -29,7 +35,7 @@ export const Title = styled.Text`
   color: #FFFFFF;
   text-decoration: ${props => (props.highlight ? 'underline' : 'none')};
   text-decoration-color: white;
-  max-width: 70%;
+  max-width: 100%;
 `
 
 export const hitSlop = {

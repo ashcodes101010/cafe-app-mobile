@@ -145,6 +145,13 @@ export const compareHours = (a, b) => {
   return (bOpen ? 1 : 0) - (aOpen ? 1 : 0)
 }
 
+// Commparison function for sorting locations by rating
+export const compareRatings = (a, b) => {
+  const aRating = a.ratingInfo.avgRating * a.ratingInfo.numReviews
+  const bRating = b.ratingInfo.avgRating * b.ratingInfo.numReviews
+  return bRating - aRating
+}
+
 // Comparison function for sorting locations by distance to geolocation
 export const compareLocations = (a, b, location) => {
   const { latitude: lat1, longitude: lon1 } = a

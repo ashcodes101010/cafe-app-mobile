@@ -1,7 +1,7 @@
 export const PATHS = [
   {
     path: 'Main',
-    label: 'Cafes',
+    label: 'Cafés',
   },
   {
     path: 'BoardPlusTracker',

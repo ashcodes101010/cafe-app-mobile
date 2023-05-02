@@ -71,6 +71,12 @@ export const MilesText = styled.Text`
   color: white;
 `
 
+export const SortByText = styled.Text`
+  font-weight: 600;
+  font-size: 12px;
+  color: white;
+`
+
 export const MilesContainer = styled.View`
   display: flex;
   flex-direction: row;

@@ -158,6 +158,8 @@ const Cafe = ({ navigation, route }) => {
       <Footer navigation={navigation} current="Main" />
       <Header
         title={cafe.fullName}
+        navigation={navigation}
+        back={true}
         Icons={() => (
           <TouchableOpacity onPress={() => toggleMap(!showMap)} hitSlop={hitSlop}>
             <MapIcon />

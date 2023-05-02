@@ -11,7 +11,7 @@ import StaticRatingStars from '../../components/StaticRatingStars'
 import { Context } from '../../context'
 import theme from '../../theme'
 import {
-  compareHours, compareHoursLocations, distanceMiles, isLocationOpen,
+  compareHours, compareHoursLocations, compareHoursRatings, compareRatings, distanceMiles, isLocationOpen,
 } from '../../utils/helper'
 import Map from './components/Map'
 import { INIT_POS } from './components/Map/constants'
@@ -23,21 +23,25 @@ import {
   styles,
   TagText,
   HorizontalTagScroll,
-  PressableTextTag
+  PressableTextTag,
+  SortByText
 } from './styles'
+import SortIcon from '../../../assets/icons/SortIcon'
 
 const Main = ({ navigation }) => {
   const {
     location, locations, cafeData, getCafes,
   } = useContext(Context)
   const [showMap, toggleMap] = useState(false)
+  const [sortBy, setSortBy] = useState('Distance')
   const [selectedTag, setSelectedTag] = useState('')
   const tags = ['Coffee', 'GrabnGo', 'Bakery', 'Lunch', 'Dinner', 'HotBreakfast', 'Grille', 'Alcohol']
 
-  const sortedLocations = location
-    ? [...locations]
-      .sort((a, b) => compareHoursLocations(a, b, location))
-    : [...locations].sort((a, b) => compareHours(a, b))
+  const sortedLocations = sortBy == 'Distance' ? location
+      ? [...locations]
+        .sort((a, b) => compareHoursLocations(a, b, location))
+      : [...locations].sort((a, b) => compareHours(a, b))
+    : [...locations].sort((a, b) => compareRatings(a, b))
 
   const filteredLocations = sortedLocations.filter(l => l.tags.includes(selectedTag));
 
@@ -76,7 +80,7 @@ const Main = ({ navigation }) => {
               <HorizontalTagScroll horizontal={true}>
                 {tags.map(tag => {
                   return (
-                    <TouchableOpacity onPress={() => setSelectedTag(tag)}>
+                    <TouchableOpacity onPress={() => selectedTag == tag ? setSelectedTag('') : setSelectedTag(tag)}>
                       <PressableTextTag style={selectedTag == tag ? styles.selectedTag : ''}>{`#${tag}`}</PressableTextTag>
                     </TouchableOpacity>
                   )
@@ -134,11 +138,17 @@ const Main = ({ navigation }) => {
       </View>
       <Footer navigation={navigation} current="Main" />
       <Header
-        title="Cafes"
+        title="Cafés"
         Icons={() => (
+          <>
+          {!showMap && <TouchableOpacity style={{marginRight: -140}} onPress={() => sortBy == 'Distance' ? setSortBy('Rating') : setSortBy('Distance')} hitSlop={hitSlop}>
+            <SortIcon />
+            <SortByText>{sortBy}</SortByText>
+          </TouchableOpacity>}
           <TouchableOpacity onPress={() => toggleMap(!showMap)} hitSlop={hitSlop}>
             <MapIcon />
           </TouchableOpacity>
+          </>
         )}
       />
     </>
