@@ -18,13 +18,13 @@ import {
   styles,
   inputHitSlop,
 } from './styles'
-import { ADD_PURCHASE, UPDATE_BALANCE } from './graphql'
+import { ADD_PURCHASE } from './graphql'
 import { Context } from '../../context'
 import BackButton from '../../components/BackButton'
 
 const TrackVisit = ({ navigation, route }) => {
   const { cafeId } = route.params || {}
-  const { locations, viewer: { viewer, refetch } } = useContext(Context)
+  const { locations, viewer: { refetch } } = useContext(Context)
 
   const [open, setOpen] = useState(false)
   const [location, setLocation] = useState(cafeId)
@@ -42,10 +42,6 @@ const TrackVisit = ({ navigation, route }) => {
     { label: 'Other', value: 'Other' },
   ]
 
-  const [updateBalance] = useMutation(UPDATE_BALANCE, {
-    onCompleted: () => refetch(),
-  })
-
   const [addPurchase] = useMutation(ADD_PURCHASE, {
     variables: {
       input: {
@@ -55,24 +51,10 @@ const TrackVisit = ({ navigation, route }) => {
         purchaseDate: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDay()}`,
       },
     },
-    onCompleted: () => navigation.goBack(),
+    onCompleted: () => {
+      refetch().then(() => navigation.goBack())
+    },
   })
-
-  const submitPurchase = () => {
-    addPurchase();
-    if (method == 'BoardPlus') {
-      let numFloat = parseFloat(cost);
-      if (!Number.isNaN(numFloat)) {
-        let difference = viewer.boardPlusBalance - numFloat;
-        difference = Math.max(0, difference);
-        updateBalance({ variables: { boardPlusBalance: difference } })
-      } else {
-        numFloat = Math.min(Math.max(0, numFloat), MAX_BALANCE)
-        updateBoardPlus(numFloat)
-        updateBalance({ variables: { boardPlusBalance: numFloat } })
-      }
-    }
-  }
 
   const isFocused = useIsFocused()
 
@@ -158,7 +140,7 @@ const TrackVisit = ({ navigation, route }) => {
           </HorizontalView>
 
           <SubmitButtonRow>
-            <SubmitButton onPress={() => submitPurchase()} disabled={disabled}>
+            <SubmitButton onPress={() => addPurchase()} disabled={disabled}>
               <SubmitButtonText>Submit</SubmitButtonText>
             </SubmitButton>
           </SubmitButtonRow>

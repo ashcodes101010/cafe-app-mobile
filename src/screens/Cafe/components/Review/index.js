@@ -13,11 +13,17 @@ import {
 } from './styles'
 import StaticRatingStars from '../../../../components/StaticRatingStars'
 
-const Review = ({ navigation, review, showLocation = false, allowDelete = false, onDelete }) => (
+const Review = ({
+  navigation, review, showLocation = false, allowDelete = false, onDelete,
+}) => (
   <ReviewContainer>
     <ReviewTop>
       <Left>
-        {allowDelete && <TouchableOpacity onPress={onDelete}><DeleteText>X</DeleteText></TouchableOpacity>}
+        {allowDelete && (
+        <TouchableOpacity onPress={onDelete}>
+          <DeleteText>X</DeleteText>
+        </TouchableOpacity>
+        )}
         <StaticRatingStars rating={review.rating} />
       </Left>
       <ReviewerNameText>{review.reviewerName}</ReviewerNameText>

@@ -26,6 +26,7 @@ export const LeftContainer = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: left;
+  align-items: center;
 `
 
 export const Title = styled.Text`
@@ -35,7 +36,7 @@ export const Title = styled.Text`
   color: #FFFFFF;
   text-decoration: ${props => (props.highlight ? 'underline' : 'none')};
   text-decoration-color: white;
-  max-width: 100%;
+  max-width: 270px;
 `
 
 export const hitSlop = {

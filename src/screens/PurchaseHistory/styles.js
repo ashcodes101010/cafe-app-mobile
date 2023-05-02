@@ -8,6 +8,14 @@ export const MainView = styled.View`
   margin-bottom: 65px;
 `
 
+export const NoPurchaseText = styled.Text`
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  color: gray;
+  margin-top: 25px;
+`
+
 export const styles = StyleSheet.create({
   scroll: {
     flexGrow: 0,

@@ -20,7 +20,7 @@ export const ReviewTop = styled.View`
 
 export const Left = styled.View`
   flex-direction: row;
-  gap: 5;
+  gap: 5px;
   justify-content: flex-start;
 `
 
