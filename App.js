@@ -1,7 +1,7 @@
 /* eslint-disable react/style-prop-object */
 import React from 'react'
 import { StatusBar } from 'expo-status-bar'
-import { ScrollView } from 'react-native'
+import { ScrollView, LogBox } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { NavigationContainer } from '@react-navigation/native'
 import { ThemeProvider } from 'styled-components'
@@ -14,6 +14,9 @@ import client from './client'
 ScrollView.defaultProps = {
   indicatorStyle: 'black',
 }
+
+// Uncomment during user testing to block warning logs
+LogBox.ignoreAllLogs()
 
 const App = () => (
   <SafeAreaProvider>

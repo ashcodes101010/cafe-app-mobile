@@ -9,7 +9,10 @@ export const MainView = styled.View`
 `
 
 export const Body = styled.View`
-  padding: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  padding-top: 10px;
 `
 
 export const DescText = styled.Text`
@@ -78,7 +81,7 @@ export const TagText = styled.Text`
   font-weight: 400;
   font-size: 12px;
   color: ${theme.colors.pressableBlue};
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 `
 
 export const ReviewsContainerTop = styled.View`

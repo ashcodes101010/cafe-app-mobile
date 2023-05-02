@@ -146,11 +146,7 @@ export const compareHours = (a, b) => {
 }
 
 // Commparison function for sorting locations by rating
-export const compareRatings = (a, b) => {
-  const aRating = a.ratingInfo.avgRating * a.ratingInfo.numReviews
-  const bRating = b.ratingInfo.avgRating * b.ratingInfo.numReviews
-  return bRating - aRating
-}
+export const compareRatings = (a, b) => b.ratingInfo.avgRating - a.ratingInfo.avgRating
 
 // Comparison function for sorting locations by distance to geolocation
 export const compareLocations = (a, b, location) => {
@@ -166,4 +162,12 @@ export const compareHoursLocations = (a, b, location) => {
     return res
   }
   return compareLocations(a, b, location)
+}
+
+export const compareHoursRatings = (a, b, location) => {
+  const res = compareHours(a, b)
+  if (res) {
+    return res
+  }
+  return compareRatings(a, b, location)
 }

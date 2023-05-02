@@ -36,7 +36,7 @@ import {
 } from './styles'
 import { GET_REVIEWS } from './graphql'
 import ExternalLink from '../../components/ExternalLink'
-import { HorizontalTagScroll } from '../Main/styles'
+import ImagesIcon from '../../../assets/icons/ImagesIcon'
 
 const { width } = Dimensions.get('window')
 
@@ -60,12 +60,12 @@ const Cafe = ({ navigation, route }) => {
 
   const noReviews = data && !loading && !writtenReviews.length
 
-  const parseTags = (tags) => {
+  const parseTags = tags => {
     const tagsArr = tags.split(',')
-    tagsArr.forEach(function(tag, index) {
-      this[index] = `#${tag} `
+    tagsArr.forEach((tag, index) => {
+      tagsArr[index] = `#${tag} `
     }, tagsArr)
-    return tagsArr;
+    return tagsArr
   }
 
   return (
@@ -126,8 +126,11 @@ const Cafe = ({ navigation, route }) => {
                 </TextAndIcon>
                 <TextAndIcon>
                   <ClockIcon scalar={0.8} style={{ width: 35, alignItems: 'center' }} />
-                  <IconText>{formatCafeHours(cafe.hours)}</IconText>
-                  {isLocationOpen(cafe.hours) && <OpenText>Open Now!</OpenText>}
+                  <IconText>
+                    {formatCafeHours(cafe.hours)}
+                    {' '}
+                    {isLocationOpen(cafe.hours) && <OpenText>Open Now!</OpenText>}
+                  </IconText>
                 </TextAndIcon>
                 <DescText>
                   {cafe.description}
@@ -159,10 +162,10 @@ const Cafe = ({ navigation, route }) => {
       <Header
         title={cafe.fullName}
         navigation={navigation}
-        back={true}
+        back
         Icons={() => (
           <TouchableOpacity onPress={() => toggleMap(!showMap)} hitSlop={hitSlop}>
-            <MapIcon />
+            {showMap ? <ImagesIcon /> : <MapIcon />}
           </TouchableOpacity>
         )}
       />

@@ -7,17 +7,23 @@ import {
   DateText,
   Bottom,
   LocationText,
-  DeleteText,
   Left,
   hitSlop,
 } from './styles'
 import StaticRatingStars from '../../../../components/StaticRatingStars'
+import TrashIcon from '../../../../../assets/icons/TrashIcon'
 
-const Review = ({ navigation, review, showLocation = false, allowDelete = false, onDelete }) => (
+const Review = ({
+  navigation, review, showLocation = false, allowDelete = false, onDelete,
+}) => (
   <ReviewContainer>
     <ReviewTop>
       <Left>
-        {allowDelete && <TouchableOpacity onPress={onDelete}><DeleteText>X</DeleteText></TouchableOpacity>}
+        {allowDelete && (
+        <TouchableOpacity onPress={onDelete} hitSlop={hitSlop}>
+          <TrashIcon />
+        </TouchableOpacity>
+        )}
         <StaticRatingStars rating={review.rating} />
       </Left>
       <ReviewerNameText>{review.reviewerName}</ReviewerNameText>

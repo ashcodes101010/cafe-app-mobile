@@ -20,11 +20,12 @@ import {
   PurchaseText,
   hitSlop,
   ColumnView,
+  NoPurchaseText,
 } from './styles'
 
 const BoardPlusTracker = ({ navigation }) => {
   const { viewer: { viewer: { boardPlusBalance } } } = useContext(Context)
-  const { data, refetch } = useQuery(BP_HISTORY, {
+  const { data, loading, refetch } = useQuery(BP_HISTORY, {
     fetchPolicy: 'cache-and-network',
   })
 
@@ -34,6 +35,8 @@ const BoardPlusTracker = ({ navigation }) => {
     const unsubscribe = navigation.addListener('focus', refetch)
     return unsubscribe
   }, [navigation])
+
+  const noPurchases = data?.boardPlusPurchases && !loading && !history.length
 
   return (
     <>
@@ -47,7 +50,7 @@ const BoardPlusTracker = ({ navigation }) => {
               </TrackerText>
             </Line>
             {/* BoardPlus Balance State Interface Affordance */}
-            <TrackerInner height={TRACKER_HEIGHT * (boardPlusBalance / MAX_BALANCE)}>
+            <TrackerInner height={Math.max(TRACKER_HEIGHT * (boardPlusBalance / MAX_BALANCE), 0)}>
               {boardPlusBalance / MAX_BALANCE > 0.15
                 ? (
                   <InnerTrackerText>
@@ -80,6 +83,7 @@ const BoardPlusTracker = ({ navigation }) => {
           <PurchaseText>Full purchase history</PurchaseText>
         </TouchableOpacity>
         <PurchaseTable history={history} boardPlusOnly />
+        {noPurchases && <NoPurchaseText>No BoardPlus purchases logged.</NoPurchaseText>}
       </MainView>
       <Footer navigation={navigation} current="BoardPlusTracker" />
       <Header

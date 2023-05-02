@@ -27,7 +27,7 @@ export const CafeContainer = styled.View`
 
 export const CafeContainerRight = styled.View`
   margin-left: 25px;
-  width: 50%;
+  width: 54%;
 `
 
 export const CafeName = styled.Text`
@@ -38,7 +38,7 @@ export const CafeName = styled.Text`
 
 export const AddressText = styled.Text`
   font-weight: 500;
-  font-size: 15px;
+  font-size: 14px;
   color: #737373;
   margin-bottom: 10px;
 `
@@ -105,6 +105,7 @@ export const Buttons = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  margin-top: 2px;
 `
 
 export const RatingContainer = styled.View`
@@ -127,6 +128,6 @@ export const styles = StyleSheet.create({
   },
   selectedTag: {
     fontWeight: 600,
-    textDecorationLine: 'underline'
-  }
+    textDecorationLine: 'underline',
+  },
 })

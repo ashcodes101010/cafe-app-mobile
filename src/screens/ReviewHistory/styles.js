@@ -19,6 +19,14 @@ export const StyledScrollView = styled.ScrollView`
   width: 100%;
 `
 
+export const NoReviewText = styled.Text`
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  color: gray;
+  margin-top: 5px;
+`
+
 export const styles = StyleSheet.create({
   loading: {
     marginTop: 150,
@@ -39,5 +47,5 @@ export const styles = StyleSheet.create({
   dialogButton: {
     color: `${theme.colors.harvardCrimson}`,
     fontSize: 16,
-  }
+  },
 })

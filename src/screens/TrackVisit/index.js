@@ -18,13 +18,13 @@ import {
   styles,
   inputHitSlop,
 } from './styles'
-import { ADD_PURCHASE, UPDATE_BALANCE } from './graphql'
+import { ADD_PURCHASE } from './graphql'
 import { Context } from '../../context'
 import BackButton from '../../components/BackButton'
 
 const TrackVisit = ({ navigation, route }) => {
   const { cafeId } = route.params || {}
-  const { locations, viewer: { viewer, refetch } } = useContext(Context)
+  const { locations, viewer: { refetch } } = useContext(Context)
 
   const [open, setOpen] = useState(false)
   const [location, setLocation] = useState(cafeId)
@@ -59,7 +59,9 @@ const TrackVisit = ({ navigation, route }) => {
         purchaseDate: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDay()}`,
       },
     },
-    onCompleted: () => navigation.goBack(),
+    onCompleted: () => {
+      refetch().then(() => navigation.goBack())
+    },
   })
 
   // Submits purchase and updates BoardPlus balance

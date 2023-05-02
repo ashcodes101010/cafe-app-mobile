@@ -115,6 +115,14 @@ export const Container = styled.View`
   margin-top: 10px;
 `
 
+export const NoPurchaseText = styled.Text`
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  color: gray;
+  margin-top: 25px;
+`
+
 export const hitSlop = {
   top: 30,
   bottom: 30,

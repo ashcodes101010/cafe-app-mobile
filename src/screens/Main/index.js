@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useContext, useEffect, useState } from 'react'
 import {
   Image, TouchableOpacity, View,
@@ -11,7 +12,8 @@ import StaticRatingStars from '../../components/StaticRatingStars'
 import { Context } from '../../context'
 import theme from '../../theme'
 import {
-  compareHours, compareHoursLocations, compareHoursRatings, compareRatings, distanceMiles, isLocationOpen,
+  compareHours, compareHoursLocations,
+  compareHoursRatings, distanceMiles, isLocationOpen,
 } from '../../utils/helper'
 import Map from './components/Map'
 import { INIT_POS } from './components/Map/constants'
@@ -24,9 +26,10 @@ import {
   TagText,
   HorizontalTagScroll,
   PressableTextTag,
-  SortByText
+  SortByText,
 } from './styles'
 import SortIcon from '../../../assets/icons/SortIcon'
+import ListIcon from '../../../assets/icons/ListIcon'
 
 const Main = ({ navigation }) => {
   const {
@@ -37,26 +40,25 @@ const Main = ({ navigation }) => {
   const [selectedTag, setSelectedTag] = useState('')
   const tags = ['Coffee', 'GrabnGo', 'Bakery', 'Lunch', 'Dinner', 'HotBreakfast', 'Grille', 'Alcohol']
 
-  const sortedLocations = sortBy == 'Distance' ? location
-      ? [...locations]
-        .sort((a, b) => compareHoursLocations(a, b, location))
-      : [...locations].sort((a, b) => compareHours(a, b))
-    : [...locations].sort((a, b) => compareRatings(a, b))
+  const sortedLocations = sortBy === 'Distance' ? (location
+    ? [...locations]
+      .sort((a, b) => compareHoursLocations(a, b, location))
+    : [...locations].sort((a, b) => compareHours(a, b)))
+    : [...locations].sort((a, b) => compareHoursRatings(a, b))
 
-  const filteredLocations = sortedLocations.filter(l => l.tags.includes(selectedTag));
-
+  const filteredLocations = sortedLocations.filter(l => l.tags?.includes(selectedTag))
 
   useEffect(() => {
     const loadData = async () => getCafes()
     loadData()
   }, [])
 
-  const parseTags = (tags) => {
-    const tagsArr = tags.split(',')
-    tagsArr.forEach(function(tag, index) {
-      this[index] = `#${tag} `
+  const parseTags = tagList => {
+    const tagsArr = tagList.split(',')
+    tagsArr.forEach((tag, index) => {
+      tagsArr[index] = `#${tag} `
     }, tagsArr)
-    return tagsArr;
+    return tagsArr
   }
 
   return (
@@ -74,24 +76,23 @@ const Main = ({ navigation }) => {
           <Map
             initialRegion={{ ...INIT_POS, ...(location || {}) }}
             locations={locations}
+            navigation={navigation}
           />
         ) : (
           <StyledScrollView>
-              <HorizontalTagScroll horizontal={true}>
-                {tags.map(tag => {
-                  return (
-                    <TouchableOpacity onPress={() => selectedTag == tag ? setSelectedTag('') : setSelectedTag(tag)}>
-                      <PressableTextTag style={selectedTag == tag ? styles.selectedTag : ''}>{`#${tag}`}</PressableTextTag>
-                    </TouchableOpacity>
-                  )
-                })}
-              </HorizontalTagScroll>
+            <HorizontalTagScroll horizontal>
+              {tags.map(tag => (
+                <TouchableOpacity onPress={() => (selectedTag === tag ? setSelectedTag('') : setSelectedTag(tag))}>
+                  <PressableTextTag style={selectedTag === tag ? styles.selectedTag : ''}>{`#${tag}`}</PressableTextTag>
+                </TouchableOpacity>
+              ))}
+            </HorizontalTagScroll>
             {filteredLocations.map(l => {
               const isOpen = isLocationOpen(l.hours)
               return (
                 <CafeContainer key={l.fullName}>
                   <Image
-                    style={{ width: 160, height: 120, borderRadius: 4 }}
+                    style={{ width: 150, height: '100%', borderRadius: 4 }}
                     source={CAFE_IMAGES[l.image][0]}
                     resizeMode="cover"
                     resizeMethod="resize"
@@ -141,13 +142,22 @@ const Main = ({ navigation }) => {
         title="Cafés"
         Icons={() => (
           <>
-          {!showMap && <TouchableOpacity style={{marginRight: -140}} onPress={() => sortBy == 'Distance' ? setSortBy('Rating') : setSortBy('Distance')} hitSlop={hitSlop}>
-            <SortIcon />
-            <SortByText>{sortBy}</SortByText>
-          </TouchableOpacity>}
-          <TouchableOpacity onPress={() => toggleMap(!showMap)} hitSlop={hitSlop}>
-            <MapIcon />
-          </TouchableOpacity>
+            {!showMap && (
+            <TouchableOpacity
+              style={{ marginRight: -140 }}
+              onPress={() => (sortBy === 'Distance'
+                ? setSortBy('Rating')
+                : setSortBy('Distance')
+              )}
+              hitSlop={hitSlop}
+            >
+              <SortIcon />
+              <SortByText>{sortBy}</SortByText>
+            </TouchableOpacity>
+            )}
+            <TouchableOpacity onPress={() => toggleMap(!showMap)} hitSlop={hitSlop}>
+              {showMap ? <ListIcon /> : <MapIcon />}
+            </TouchableOpacity>
           </>
         )}
       />

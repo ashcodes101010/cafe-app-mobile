@@ -20,7 +20,7 @@ export const ReviewTop = styled.View`
 
 export const Left = styled.View`
   flex-direction: row;
-  gap: 5;
+  gap: 5px;
   justify-content: flex-start;
 `
 
@@ -34,13 +34,6 @@ export const DateText = styled.Text`
   font-weight: 400;
   font-size: 14px;
   color: gray;
-`
-
-export const DeleteText = styled.Text`
-  font-weight: 600;
-  font-size: 15px;
-  color: gray;
-  margin-top: 4;
 `
 
 export const LocationText = styled.Text`
