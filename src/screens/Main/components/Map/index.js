@@ -3,7 +3,7 @@ import React, { useRef } from 'react'
 import MapView, { Marker } from 'react-native-maps'
 import MarkerIcon from '../../../../../assets/icons/MarkerIcon'
 
-const Map = ({ initialRegion, locations }) => {
+const Map = ({ initialRegion, locations, navigation }) => {
   const mapRef = useRef(null)
 
   return (
@@ -18,13 +18,16 @@ const Map = ({ initialRegion, locations }) => {
       minZoomLevel={12}
       maxZoomLevel={18}
     >
-      {locations.map(({ longitude, latitude, fullName }, i) => (
+      {locations.map(({
+        longitude, latitude, fullName, id,
+      }, i) => (
         <Marker
           identifier="cafe"
           tracksViewChanges={false}
           key={i}
           coordinate={{ longitude, latitude }}
           title={fullName}
+          onCalloutPress={() => navigation.navigate('Cafe', { id })}
         >
           <MarkerIcon />
         </Marker>

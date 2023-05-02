@@ -76,6 +76,7 @@ const Main = ({ navigation }) => {
           <Map
             initialRegion={{ ...INIT_POS, ...(location || {}) }}
             locations={locations}
+            navigation={navigation}
           />
         ) : (
           <StyledScrollView>
