@@ -102,7 +102,7 @@ export const StyledButtonsView = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-bottom: 20px;
 `
 
 export const BlueButtonText = styled.Text`

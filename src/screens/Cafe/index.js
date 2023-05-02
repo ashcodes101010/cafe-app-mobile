@@ -136,6 +136,13 @@ const Cafe = ({ navigation, route }) => {
                   {cafe.description}
                   <ExternalLink link={cafe.externalLink} style={styles.externalLink} />
                 </DescText>
+                <ReviewsContainerTop>
+                  <ReviewText>Reviews</ReviewText>
+                  <RatingContainer>
+                    <StaticRatingStars rating={cafe.ratingInfo.avgRating} />
+                    <RatingText>{`(${cafe.ratingInfo.numReviews})`}</RatingText>
+                  </RatingContainer>
+                </ReviewsContainerTop>
                 <StyledButtonsView>
                   <TouchableOpacity onPress={() => navigation.navigate('LeaveReview', { cafeName: cafe.fullName, cafeId: id })} hitSlop={hitSlop}>
                     <BlueButtonText>Leave a Review</BlueButtonText>
@@ -144,13 +151,6 @@ const Cafe = ({ navigation, route }) => {
                     <BlueButtonText>Track a Visit</BlueButtonText>
                   </TouchableOpacity>
                 </StyledButtonsView>
-                <ReviewsContainerTop>
-                  <ReviewText>Reviews</ReviewText>
-                  <RatingContainer>
-                    <StaticRatingStars rating={cafe.ratingInfo.avgRating} />
-                    <RatingText>{`(${cafe.ratingInfo.numReviews})`}</RatingText>
-                  </RatingContainer>
-                </ReviewsContainerTop>
                 {noReviews && <NoReviewText>No written reviews.</NoReviewText>}
                 {writtenReviews.map(r => <Review key={r.id} review={r} />)}
               </Body>

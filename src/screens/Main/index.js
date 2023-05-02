@@ -90,7 +90,7 @@ const Main = ({ navigation }) => {
             {filteredLocations.map(l => {
               const isOpen = isLocationOpen(l.hours)
               return (
-                <CafeContainer key={l.fullName}>
+                <CafeContainer key={l.fullName} onPress={() => navigation.navigate('Cafe', { id: l.id })}>
                   <Image
                     style={{ width: 150, height: '100%', borderRadius: 4 }}
                     source={CAFE_IMAGES[l.image][0]}

@@ -16,7 +16,7 @@ export const HorizontalTagScroll = styled.ScrollView`
   overflow: hidden;
 `
 
-export const CafeContainer = styled.View`
+export const CafeContainer = styled.Pressable`
   min-height: 130px;
   width: 100%;
   background-color: white;
