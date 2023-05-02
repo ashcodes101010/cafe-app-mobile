@@ -49,6 +49,7 @@ const BoardPlusTracker = ({ navigation }) => {
                 {`$${MAX_BALANCE}`}
               </TrackerText>
             </Line>
+            {/* BoardPlus Balance State Interface Affordance */}
             <TrackerInner height={Math.max(TRACKER_HEIGHT * (boardPlusBalance / MAX_BALANCE), 0)}>
               {boardPlusBalance / MAX_BALANCE > 0.15
                 ? (

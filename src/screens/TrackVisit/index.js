@@ -41,7 +41,11 @@ const TrackVisit = ({ navigation, route }) => {
     { label: 'Credit/Debit', value: 'Credit/Debit' },
     { label: 'Other', value: 'Other' },
   ]
+  
+  // CONCEPT: Purchase
+  // ACTION: logPurchase(purchaseInput)
 
+  // Updates purchase table in DB
   const [addPurchase] = useMutation(ADD_PURCHASE, {
     variables: {
       input: {
