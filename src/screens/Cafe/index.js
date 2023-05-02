@@ -36,6 +36,7 @@ import {
 } from './styles'
 import { GET_REVIEWS } from './graphql'
 import ExternalLink from '../../components/ExternalLink'
+import ImagesIcon from '../../../assets/icons/ImagesIcon'
 
 const { width } = Dimensions.get('window')
 
@@ -161,7 +162,7 @@ const Cafe = ({ navigation, route }) => {
         back
         Icons={() => (
           <TouchableOpacity onPress={() => toggleMap(!showMap)} hitSlop={hitSlop}>
-            <MapIcon />
+            {showMap ? <ImagesIcon /> : <MapIcon />}
           </TouchableOpacity>
         )}
       />

@@ -36,13 +36,6 @@ export const DateText = styled.Text`
   color: gray;
 `
 
-export const DeleteText = styled.Text`
-  font-weight: 600;
-  font-size: 15px;
-  color: gray;
-  margin-top: 4px;
-`
-
 export const LocationText = styled.Text`
   font-weight: 400;
   font-size: 14px;

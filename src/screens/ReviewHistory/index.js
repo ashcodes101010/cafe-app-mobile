@@ -16,6 +16,7 @@ import {
 import { USER_REVIEWS, DELETE_REVIEW } from './graphql'
 import theme from '../../theme'
 import BackButton from '../../components/BackButton'
+import { GET_CAFES } from '../Main/graphql'
 
 const ReviewHistory = ({ navigation }) => {
   const { data, loading } = useQuery(USER_REVIEWS, {
@@ -24,7 +25,7 @@ const ReviewHistory = ({ navigation }) => {
 
   const [deleteReview] = useMutation(DELETE_REVIEW, {
     refetchQueries: [
-      { query: USER_REVIEWS },
+      { query: USER_REVIEWS }, { query: GET_CAFES },
     ],
   })
 
@@ -45,9 +46,6 @@ const ReviewHistory = ({ navigation }) => {
           <Portal>
             <Dialog style={styles.dialog} visible={visible} onDismiss={hideDialog}>
               <Dialog.Title style={styles.dialogCenter}>Delete Review?</Dialog.Title>
-              {/* <Dialog.Content>
-              <Text variant="bodyMedium">Delete Review?</Text>
-            </Dialog.Content> */}
               <Dialog.Actions style={styles.dialogCenter}>
                 <Button
                   labelStyle={styles.dialogButton}

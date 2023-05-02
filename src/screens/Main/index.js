@@ -29,6 +29,7 @@ import {
   SortByText,
 } from './styles'
 import SortIcon from '../../../assets/icons/SortIcon'
+import ListIcon from '../../../assets/icons/ListIcon'
 
 const Main = ({ navigation }) => {
   const {
@@ -154,7 +155,7 @@ const Main = ({ navigation }) => {
             </TouchableOpacity>
             )}
             <TouchableOpacity onPress={() => toggleMap(!showMap)} hitSlop={hitSlop}>
-              <MapIcon />
+              {showMap ? <ListIcon /> : <MapIcon />}
             </TouchableOpacity>
           </>
         )}
