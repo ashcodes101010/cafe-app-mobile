@@ -126,8 +126,11 @@ const Cafe = ({ navigation, route }) => {
                 </TextAndIcon>
                 <TextAndIcon>
                   <ClockIcon scalar={0.8} style={{ width: 35, alignItems: 'center' }} />
-                  <IconText>{formatCafeHours(cafe.hours)}</IconText>
-                  {isLocationOpen(cafe.hours) && <OpenText>Open Now!</OpenText>}
+                  <IconText>
+                    {formatCafeHours(cafe.hours)}
+                    {' '}
+                    {isLocationOpen(cafe.hours) && <OpenText>Open Now!</OpenText>}
+                  </IconText>
                 </TextAndIcon>
                 <DescText>
                   {cafe.description}
