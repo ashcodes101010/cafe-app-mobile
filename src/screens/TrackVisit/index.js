@@ -41,10 +41,6 @@ const TrackVisit = ({ navigation, route }) => {
     { label: 'Credit/Debit', value: 'Credit/Debit' },
     { label: 'Other', value: 'Other' },
   ]
-
-  const [updateBalance] = useMutation(UPDATE_BALANCE, {
-    onCompleted: () => refetch(),
-  })
   
   // CONCEPT: Purchase
   // ACTION: logPurchase(purchaseInput)
@@ -63,23 +59,6 @@ const TrackVisit = ({ navigation, route }) => {
       refetch().then(() => navigation.goBack())
     },
   })
-
-  // Submits purchase and updates BoardPlus balance
-  const submitPurchase = () => {
-    addPurchase();
-    if (method == 'BoardPlus') {
-      let numFloat = parseFloat(cost);
-      if (!Number.isNaN(numFloat)) {
-        let difference = viewer.boardPlusBalance - numFloat;
-        difference = Math.max(0, difference);
-        updateBalance({ variables: { boardPlusBalance: difference } })
-      } else {
-        numFloat = Math.min(Math.max(0, numFloat), MAX_BALANCE)
-        updateBoardPlus(numFloat)
-        updateBalance({ variables: { boardPlusBalance: numFloat } })
-      }
-    }
-  }
 
   const isFocused = useIsFocused()
 
@@ -165,7 +144,7 @@ const TrackVisit = ({ navigation, route }) => {
           </HorizontalView>
 
           <SubmitButtonRow>
-            <SubmitButton onPress={() => submitPurchase()} disabled={disabled}>
+            <SubmitButton onPress={() => addPurchase()} disabled={disabled}>
               <SubmitButtonText>Submit</SubmitButtonText>
             </SubmitButton>
           </SubmitButtonRow>
