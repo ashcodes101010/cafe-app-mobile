@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
 import styled from 'styled-components'
+import theme from '../../theme'
 
 export const MainView = styled.View`
   flex: 1;
@@ -27,4 +28,16 @@ export const styles = StyleSheet.create({
     marginLeft: 20,
     marginTop: 20,
   },
+  dialog: {
+    backgroundColor: 'white',
+    alignSelf: 'center',
+    width: 300,
+  },
+  dialogCenter: {
+    alignSelf: 'center',
+  },
+  dialogButton: {
+    color: `${theme.colors.harvardCrimson}`,
+    fontSize: 16,
+  }
 })

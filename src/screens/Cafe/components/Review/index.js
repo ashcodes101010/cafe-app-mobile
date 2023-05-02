@@ -7,14 +7,19 @@ import {
   DateText,
   Bottom,
   LocationText,
+  DeleteText,
+  Left,
   hitSlop,
 } from './styles'
 import StaticRatingStars from '../../../../components/StaticRatingStars'
 
-const Review = ({ navigation, review, showLocation = false }) => (
+const Review = ({ navigation, review, showLocation = false, allowDelete = false, onDelete }) => (
   <ReviewContainer>
     <ReviewTop>
-      <StaticRatingStars rating={review.rating} />
+      <Left>
+        {allowDelete && <TouchableOpacity onPress={onDelete}><DeleteText>X</DeleteText></TouchableOpacity>}
+        <StaticRatingStars rating={review.rating} />
+      </Left>
       <ReviewerNameText>{review.reviewerName}</ReviewerNameText>
     </ReviewTop>
     <Text style={{ color: review.review ? 'black' : 'gray' }}>
