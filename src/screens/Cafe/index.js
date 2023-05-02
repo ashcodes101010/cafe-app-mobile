@@ -32,9 +32,11 @@ import {
   NoReviewText,
   StyledButtonsView,
   BlueButtonText,
+  TagText,
 } from './styles'
 import { GET_REVIEWS } from './graphql'
 import ExternalLink from '../../components/ExternalLink'
+import { HorizontalTagScroll } from '../Main/styles'
 
 const { width } = Dimensions.get('window')
 
@@ -57,6 +59,14 @@ const Cafe = ({ navigation, route }) => {
   }, [navigation])
 
   const noReviews = data && !loading && !writtenReviews.length
+
+  const parseTags = (tags) => {
+    const tagsArr = tags.split(',')
+    tagsArr.forEach(function(tag, index) {
+      this[index] = `#${tag} `
+    }, tagsArr)
+    return tagsArr;
+  }
 
   return (
     <>
@@ -109,6 +119,7 @@ const Cafe = ({ navigation, route }) => {
             )}
             <StyledScrollView>
               <Body>
+                <TagText>{parseTags(cafe.tags)}</TagText>
                 <TextAndIcon>
                   <MarkerIcon style={{ width: 35 }} />
                   <IconText>{cafe.shortAddress}</IconText>

@@ -74,6 +74,13 @@ export const NoReviewText = styled.Text`
   margin-top: 5px;
 `
 
+export const TagText = styled.Text`
+  font-weight: 400;
+  font-size: 12px;
+  color: ${theme.colors.pressableBlue};
+  margin-bottom: 5px;
+`
+
 export const ReviewsContainerTop = styled.View`
   flex-direction: row;
   justify-content: space-between;

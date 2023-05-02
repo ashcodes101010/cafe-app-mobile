@@ -9,6 +9,7 @@ export const GET_CAFES = gql`
       description
       longitude
       latitude
+      tags
       image
       externalLink
       ratingInfo

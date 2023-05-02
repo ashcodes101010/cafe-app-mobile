@@ -1,13 +1,19 @@
 import { StyleSheet } from 'react-native'
 import styled from 'styled-components'
+import theme from '../../theme'
 
 export const StyledScrollView = styled.ScrollView`
   flex-grow: 1;
   background-color: transparent;
   margin-bottom: 65px;
   margin-top: 120px;
-  border-radius: 10px;
   width: 100%;
+`
+
+export const HorizontalTagScroll = styled.ScrollView`
+  height: 40px;
+  background-color: ${theme.colors.harvardCrimson}
+  overflow: hidden;
 `
 
 export const CafeContainer = styled.View`
@@ -35,6 +41,20 @@ export const AddressText = styled.Text`
   font-size: 15px;
   color: #737373;
   margin-bottom: 10px;
+`
+
+export const TagText = styled.Text`
+  font-weight: 400;
+  font-size: 12px;
+  color: ${theme.colors.pressableBlue};
+  margin-bottom: 5px;
+`
+
+export const PressableTextTag = styled.Text`
+  font-weight: 400;
+  font-size: 16px;
+  padding: 11px;
+  color: white;
 `
 
 export const RatingText = styled.Text`
@@ -99,4 +119,8 @@ export const styles = StyleSheet.create({
   loading: {
     marginTop: 150,
   },
+  selectedTag: {
+    fontWeight: 600,
+    textDecorationLine: 'underline'
+  }
 })

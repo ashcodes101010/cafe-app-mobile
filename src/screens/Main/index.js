@@ -21,6 +21,9 @@ import {
   CafeContainer, CafeContainerRight, CafeName,
   hitSlop, MilesContainer, MilesText, MoreInfoButton, RatingContainer, RatingText, StyledScrollView,
   styles,
+  TagText,
+  HorizontalTagScroll,
+  PressableTextTag
 } from './styles'
 
 const Main = ({ navigation }) => {
@@ -28,15 +31,29 @@ const Main = ({ navigation }) => {
     location, locations, cafeData, getCafes,
   } = useContext(Context)
   const [showMap, toggleMap] = useState(false)
+  const [selectedTag, setSelectedTag] = useState('')
+  const tags = ['Coffee', 'GrabnGo', 'Bakery', 'Lunch', 'Dinner', 'HotBreakfast', 'Grille', 'Alcohol']
+
   const sortedLocations = location
     ? [...locations]
       .sort((a, b) => compareHoursLocations(a, b, location))
     : [...locations].sort((a, b) => compareHours(a, b))
 
+  const filteredLocations = sortedLocations.filter(l => l.tags.includes(selectedTag));
+
+
   useEffect(() => {
     const loadData = async () => getCafes()
     loadData()
   }, [])
+
+  const parseTags = (tags) => {
+    const tagsArr = tags.split(',')
+    tagsArr.forEach(function(tag, index) {
+      this[index] = `#${tag} `
+    }, tagsArr)
+    return tagsArr;
+  }
 
   return (
     <>
@@ -56,7 +73,16 @@ const Main = ({ navigation }) => {
           />
         ) : (
           <StyledScrollView>
-            {sortedLocations.map(l => {
+              <HorizontalTagScroll horizontal={true}>
+                {tags.map(tag => {
+                  return (
+                    <TouchableOpacity onPress={() => setSelectedTag(tag)}>
+                      <PressableTextTag style={selectedTag == tag ? styles.selectedTag : ''}>{`#${tag}`}</PressableTextTag>
+                    </TouchableOpacity>
+                  )
+                })}
+              </HorizontalTagScroll>
+            {filteredLocations.map(l => {
               const isOpen = isLocationOpen(l.hours)
               return (
                 <CafeContainer key={l.fullName}>
@@ -68,6 +94,7 @@ const Main = ({ navigation }) => {
                   />
                   <CafeContainerRight>
                     <CafeName>{l.fullName}</CafeName>
+                    <TagText>{parseTags(l.tags)}</TagText>
                     <AddressText>{l.shortAddress}</AddressText>
                     {isOpen && <AddressText>Open Now!</AddressText>}
                     <RatingContainer>
